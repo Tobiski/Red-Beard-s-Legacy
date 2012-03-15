@@ -67,9 +67,9 @@ void Game::GameLoop()
 {
 	while(running)
 	{
-	    if(gameState == MAINMENU)
+	    if(gameState == MAINMENU || gameState == GAMEOVER)
 	    {
-	        /* Display mainmenu */
+	        /* Display mainmenu or Game Over -screen */
 	        HandleInput();
             Render();
 	    }
@@ -84,11 +84,6 @@ void Game::GameLoop()
 	    {
 	        /* Display pause menu*/
             HandleInput();
-	    }
-	    else if(gameState == GAMEOVER)
-	    {
-	        HandleInput();
-	        Render();
 	    }
 	}
 }
@@ -253,7 +248,8 @@ void Game::Update()
 
 				if(cannonballs[i]->CheckCollision(*enemies[j]))
 				{
-					if(cannonballs[i]->GetId() != 1)
+				    /* Check that enemy ships don't shoot each other */
+					if(cannonballs[i]->GetId() != ENEMY)
 					{
 						if(enemies[j]->GetHeatlth() > 1)
 						{
@@ -266,6 +262,7 @@ void Game::Update()
 						{
  							enemies.erase(enemies.begin()+j);
 							cannonballs.erase(cannonballs.begin()+i);
+							ship->AddShipsDestroyed();
 							ship->AddScore();
 							break;
 						}
@@ -332,6 +329,12 @@ void Game::Render()
     else if(gameState == GAMEOVER)
     {
         window->Draw(gameOverSprite);
+
+        sf::String infoText(ship->GetInfo(), scoreFont, 32);
+        infoText.SetCenter(infoText.GetSize(), infoText.GetSize());
+        infoText.SetColor(sf::Color(0, 0, 0, 255));
+        infoText.SetPosition(WIN_WIDTH/2 - 100, WIN_HEIGHT/2 + 100);
+        window->Draw(infoText);
     }
 
 	window->Display();

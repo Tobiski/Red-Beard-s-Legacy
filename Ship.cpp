@@ -19,6 +19,8 @@ Ship::Ship(std::string imageDir, float posx, float posy)
 	cooldown = 0;
 	score = 0;
 	health = 5;
+	shipsDestroyed = 0;
+	cannonballsShot = 0;
 }
 
 Ship::~Ship()
@@ -109,10 +111,11 @@ void Ship::Update()
 }
 
 void Ship::Fire(std::vector<Cannonball*> &cannonballs)
-{	
+{
 	if(cooldown == 0)
 	{
 		cooldown = 80;
+		cannonballsShot++;
 		cannonballs.push_back(new Cannonball(posx, posy, (rotationAngle+90), PLAYER));
 	}
 }
@@ -125,6 +128,21 @@ std::string Ship::GetScore()
 	itoa(score, points, 10);
 	addString.assign(points);
 	scoreString += addString;
-	
+
 	return scoreString;
+}
+
+std::string Ship::GetInfo()
+{
+    std::string info1 = "You shot ";
+    std::string info2 = " cannonballs";
+    std::string cannonballsString;
+
+    char shots[11];
+    itoa(cannonballsShot, shots, 10);
+    cannonballsString.assign(shots);
+    info1 += cannonballsString;
+    info1 += info2;
+
+    return info1;
 }
