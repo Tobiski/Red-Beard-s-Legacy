@@ -58,7 +58,6 @@ void Game::GameOver()
 	cannonballs.clear();
 	enemies.clear();
     gameState = GAMEOVER;
-	ship = new Ship("images/ship.png", 100, 100);
 
 	GameLoop();
 }
@@ -134,6 +133,7 @@ void Game::HandleInput()
             if(gameState == GAMEOVER)
             {
                 gameState = MAINMENU;
+                ship = new Ship("images/ship.png", 100, 100);
             }
         }
 
@@ -248,13 +248,14 @@ void Game::Update()
 
 				if(cannonballs[i]->CheckCollision(*enemies[j]))
 				{
-				    /* Check that enemy ships don't shoot each other */
+				    /* If cannonball belongs to player, check collision against enemy ships */
 					if(cannonballs[i]->GetId() != ENEMY)
 					{
 						if(enemies[j]->GetHeatlth() > 1)
 						{
 							enemies[j]->GetHit();
 							cannonballs.erase(cannonballs.begin()+i);
+							ship->AddHit();
 							ship->AddScore();
 							break;
 						}
@@ -262,7 +263,7 @@ void Game::Update()
 						{
  							enemies.erase(enemies.begin()+j);
 							cannonballs.erase(cannonballs.begin()+i);
-							ship->AddShipsDestroyed();
+							ship->AddHit();
 							ship->AddScore();
 							break;
 						}

@@ -19,7 +19,7 @@ Ship::Ship(std::string imageDir, float posx, float posy)
 	cooldown = 0;
 	score = 0;
 	health = 5;
-	shipsDestroyed = 0;
+	shipsHit = 0;
 	cannonballsShot = 0;
 }
 
@@ -138,11 +138,22 @@ std::string Ship::GetInfo()
     std::string info2 = " cannonballs";
     std::string cannonballsString;
 
+    if(cannonballsShot != 0)
+        accuracy = (float)shipsHit / (float)cannonballsShot * 100;
+
     char shots[11];
     itoa(cannonballsShot, shots, 10);
     cannonballsString.assign(shots);
     info1 += cannonballsString;
     info1 += info2;
+    info1 += "\nYour accuracy was ";
+
+    std::string accString;
+    char acc[11];
+    itoa(accuracy, acc, 10);
+    accString.assign(acc);
+    info1 += accString;
+    info1 += " %";
 
     return info1;
 }
