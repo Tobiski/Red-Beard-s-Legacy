@@ -285,11 +285,11 @@ void Game::Render()
         window->Draw(menuSprite);
         if(menuSelect == START)
         {
-            skullSprite.SetPosition(280, 350);
+            skullSprite.SetPosition(340, 290);
         }
         else if(menuSelect == QUIT)
         {
-            skullSprite.SetPosition(280, 470);
+            skullSprite.SetPosition(340, 400);
         }
         window->Draw(skullSprite);
     }
