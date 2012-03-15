@@ -23,7 +23,7 @@ Enemy::Enemy()
 	posy = rand()%(WIN_HEIGHT - 200 ) + 100;
 	sprite.SetRotation(rotationAngle);
 	sprite.SetPosition(posx, posy);
-	turnTime = 400;
+	turnTime = 600;
 	turnDirection = 2;
 	health = 3;
 	shootTime.Reset();
@@ -39,28 +39,34 @@ void Enemy::Update()
 	speedy = cos(rotationAngle*3.14159265/180);
 
 	/* If ship has collided then we turn it to another direction for 1 sec */
-	if(cTurnTime.GetElapsedTime() < 1 && forceTurn == true)
+	if(cTurnTime.GetElapsedTime() < 0.5 && forceTurn == true)
 	{
 		if(forceDirection == LEFT)
 			rotationAngle--;
 		else
 			rotationAngle++;
 	}
-	else 
+	else
 	{
 		forceTurn = false;
 
 		Turn();
 	}
 
-	if(posx + speedx > 100 && posx+ speedx < WIN_WIDTH - 100 || turnTime > 200)
+	if(posx + speedx > 50 && posx+ speedx < WIN_WIDTH - 50 || turnTime > 400)
 	{
-		posx = posx + speedx;
+	    if(posx < 100 || posx > WIN_WIDTH - 100)
+            posx = posx + speedx*0.5;
+	    else
+            posx = posx + speedx;
 	}
 
-	if(posy+ speedy*-1 > 100 && posy+ speedy*-1 < WIN_HEIGHT - 100)
+	if(posy+ speedy*-1 > 50 && posy+ speedy*-1 < WIN_HEIGHT - 50)
 	{
-		posy = posy + speedy*-1;
+	    if(posy < 100 || posy > WIN_HEIGHT - 100)
+            posy = posy + speedy*-0.5;
+        else
+            posy = posy + speedy*-1;
 	}
 
 	sprite.SetRotation(rotationAngle*-1);
@@ -88,29 +94,32 @@ void Enemy::Turn()
 {
 	if(turnTime == 0)
 	{
-		turnTime = 200;
-		if(posx < 100 || posx > WIN_WIDTH - 10 || posy < 100 || posy > WIN_HEIGHT - 100)
+		turnTime = 400;
+		if(posx < 200 || posx > WIN_WIDTH - 200 || posy < 200 || posy > WIN_HEIGHT - 200)
 		{
-			turnDirection = rand()%3;
+			turnDirection = rand()%2;
 		}
 		else
 		{
-			turnDirection = rand()%3;
+			turnDirection = rand()%4;
 		}
 	}
 
-	if(turnDirection == RIGHT)
-	{
-		rotationAngle++;
-	}
-	else if(turnDirection == LEFT)
-	{
-		rotationAngle--;
-	}
-	else
-	{
-		rotationAngle = rotationAngle;
-	}
+    if(turnTime > 230)
+    {
+        if(turnDirection == RIGHT)
+        {
+            rotationAngle++;
+        }
+        else if(turnDirection == LEFT)
+        {
+            rotationAngle--;
+        }
+        else
+        {
+            rotationAngle = rotationAngle;
+        }
+    }
 }
 
 void Enemy::Fire(std::vector<Cannonball*> &cannonballs)
@@ -121,12 +130,12 @@ void Enemy::Fire(std::vector<Cannonball*> &cannonballs)
 		{
 			cannonballs.push_back(new Cannonball(posx, posy, (rotationAngle+90), ENEMY));
 		}
-		
+
 		shootTime.Reset();
 	}
 }
 
-void Enemy::ForceTurn(int dir) 
+void Enemy::ForceTurn(int dir)
 {
 	forceTurn = true;
 	cTurnTime.Reset();

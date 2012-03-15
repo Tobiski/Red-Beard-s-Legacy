@@ -17,6 +17,7 @@
 				<Linker>
 					<Add option="-lsfml-graphics-d" />
 					<Add option="-lsfml-window-d" />
+					<Add option="-lsfml-audio-d" />
 					<Add option="-lsfml-system-d" />
 				</Linker>
 			</Target>
@@ -32,6 +33,7 @@
 					<Add option="-s" />
 					<Add option="-lsfml-graphics" />
 					<Add option="-lsfml-window" />
+					<Add option="-lsfml-audio" />
 					<Add option="-lsfml-system" />
 				</Linker>
 			</Target>

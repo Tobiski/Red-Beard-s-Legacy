@@ -45,7 +45,7 @@ void Game::Init()
 
 	spawnCooldown = 0;
 	running = true;
-	window = new sf::RenderWindow(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, WIN_BPP), "Untitled Game");
+	window = new sf::RenderWindow(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, WIN_BPP), "Red Beard's Legacy");
 	window->SetFramerateLimit(MAXFPS);
 
     ship = new Ship("images/ship.png", 100, 100);

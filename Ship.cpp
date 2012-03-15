@@ -88,17 +88,10 @@ void Ship::Update()
 	{
 		posx = posx + speedx;
 	}
-	else
-	{
-		posx = posx;
-	}
+
 	if(posy+ speedy*-1 > 0 && posy+ speedy*-1 < WIN_HEIGHT)
 	{
 		posy = posy + speedy*-1;
-	}
-	else
-	{
-		posy = posy;
 	}
 
 	if(cooldown > 0)
