@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1331807853 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\enemy.cpp
+	<iostream>
+	"Enemy.h"
+	"Cannonball.h"
+	"Misc.h"
+
+1331754162 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\enemy.h
+	"ShipEntity.h"
+
+1331761817 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\shipentity.h
+	<SFML/Graphics.hpp>
+
+1331763059 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\cannonball.h
+	<SFML/Graphics.hpp>
+
+1331758175 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\misc.h
+
+1331810672 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\game.cpp
+	<iostream>
+	"Game.h"
+	"Misc.h"
+	"Ship.h"
+	"Cannonball.h"
+	"Enemy.h"
+
+1331764870 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\game.h
+	<vector>
+	<SFML\Graphics.hpp>
+
+1331760359 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\ship.h
+	"ShipEntity.h"
+
+1331807355 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\ship.cpp
+	<iostream>
+	"Misc.h"
+	"Ship.h"
+	"Cannonball.h"
+
+1331762184 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\shipentity.cpp
+	<SFML/Graphics.hpp>
+	"ShipEntity.h"
+	"Misc.h"
+
+1331745854 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\main.cpp
+	<iostream>
+	"Game.h"
+
+1331762566 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\cannonball.cpp
+	"Cannonball.h"
+	"Enemy.h"
+	"Misc.h"
+
