@@ -35,6 +35,10 @@ void Game::Init()
     skullImage.SetSmooth(false);
     skullSprite.SetImage(skullImage);
 
+    pauseSkullImage.LoadFromFile("images/pauseskull.png");
+    pauseSkullImage.SetSmooth(false);
+    pauseSkullSprite.SetImage(pauseSkullImage);
+
     pirateImage.LoadFromFile("images/pirate_face.png");
     pirateImage.SetSmooth(false);
     pirateSprite.SetImage(pirateImage);
@@ -83,6 +87,7 @@ void Game::GameLoop()
         {
             /* Display pause menu*/
             HandleInput();
+            Render();
         }
     }
 }
@@ -101,6 +106,7 @@ void Game::HandleInput()
             if(gameState == PLAYING)
             {
                 gameState = PAUSED;
+                pauseSelect = RESUME;
             }
             else if(gameState == PAUSED)
             {
@@ -108,29 +114,50 @@ void Game::HandleInput()
             }
         }
 
-        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Down && gameState == MAINMENU)
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Down)
         {
-            if(menuSelect == START)
-                menuSelect = QUIT;
+            if(gameState == MAINMENU)
+            {
+                if(menuSelect == START)
+                    menuSelect = QUIT;
+            }
+            else if(gameState == PAUSED)
+            {
+                if(pauseSelect == RESUME)
+                    pauseSelect = MENU;
+            }
         }
 
-        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Up && gameState == MAINMENU)
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Up)
         {
-            if(menuSelect == QUIT)
-                menuSelect = START;
+            if(gameState == MAINMENU)
+            {
+                if(menuSelect == QUIT)
+                    menuSelect = START;
+            }
+            else if(gameState == PAUSED)
+            {
+                if(pauseSelect == MENU)
+                    pauseSelect = RESUME;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Return)
         {
             if(gameState == MAINMENU && menuSelect == QUIT)
-            {
                 window->Close();
-            }
             else if(gameState == MAINMENU && menuSelect == START)
-            {
                 gameState = PLAYING;
+            else if(gameState == PAUSED && pauseSelect == RESUME)
+                gameState = PLAYING;
+            else if(gameState == PAUSED && pauseSelect == MENU)
+            {
+                gameState = MAINMENU;
+                cannonballs.clear();
+                enemies.clear();
+                ship = new Ship("images/ship.png", 100, 100);
             }
-            if(gameState == GAMEOVER)
+            else if(gameState == GAMEOVER)
             {
                 gameState = MAINMENU;
                 ship = new Ship("images/ship.png", 100, 100);
@@ -321,11 +348,36 @@ void Game::Render()
     }
     else if(gameState == PAUSED)
     {
+        window->Clear();
+
         sf::String pausedText("PAUSED", scoreFont, 42);
-        pausedText.SetColor(sf::Color(0, 0, 0, 200));
+        pausedText.SetColor(sf::Color(255, 255, 255, 200));
         pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
         pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+
+        sf::String resumeText("Resume", scoreFont, 36);
+        resumeText.SetColor(sf::Color(255, 255, 255, 200));
+        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
+        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+
+        sf::String mainmenuText("Main Menu", scoreFont, 36);
+        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
+        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
+        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+
         window->Draw(pausedText);
+        window->Draw(resumeText);
+        window->Draw(mainmenuText);
+
+        if(pauseSelect == RESUME)
+        {
+            pauseSkullSprite.SetPosition(420, 400);
+        }
+        else if(pauseSelect == MENU)
+        {
+            pauseSkullSprite.SetPosition(420, 450);
+        }
+        window->Draw(pauseSkullSprite);
     }
     else if(gameState == GAMEOVER)
     {

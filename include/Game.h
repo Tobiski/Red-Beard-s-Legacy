@@ -27,11 +27,15 @@ private:
     sf::Sprite menuSprite;
     sf::Image skullImage;
     sf::Sprite skullSprite;
+    sf::Image pauseSkullImage;
+    sf::Sprite pauseSkullSprite;
     sf::Image pirateImage;
     sf::Sprite pirateSprite;
     int spawnCooldown;
     enum MENUSELECT {START, QUIT};
     MENUSELECT menuSelect;
+    enum PAUSESELECT {RESUME, MENU};
+    PAUSESELECT pauseSelect;
     enum GAMESTATE {MAINMENU, PLAYING, PAUSED, GAMEOVER};
     GAMESTATE gameState;
 
