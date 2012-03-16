@@ -41,20 +41,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Cannonball.cpp" />
-		<Unit filename="Cannonball.h" />
-		<Unit filename="Enemy.cpp" />
-		<Unit filename="Enemy.h" />
-		<Unit filename="Game.cpp" />
-		<Unit filename="Game.h" />
-		<Unit filename="Misc.h" />
-		<Unit filename="Ship.cpp" />
-		<Unit filename="Ship.h" />
-		<Unit filename="ShipEntity.cpp" />
-		<Unit filename="ShipEntity.h" />
+		<Unit filename="include/Cannonball.h" />
 		<Unit filename="include/Drawable.h" />
-		<Unit filename="main.cpp" />
+		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/Game.h" />
+		<Unit filename="include/Misc.h" />
+		<Unit filename="include/Monster.h" />
+		<Unit filename="include/Ship.h" />
+		<Unit filename="include/ShipEntity.h" />
+		<Unit filename="src/Cannonball.cpp" />
 		<Unit filename="src/Drawable.cpp" />
+		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Monster.cpp" />
+		<Unit filename="src/Ship.cpp" />
+		<Unit filename="src/ShipEntity.cpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

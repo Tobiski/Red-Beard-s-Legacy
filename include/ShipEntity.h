@@ -2,10 +2,11 @@
 #define _SHIPENTITY_H_
 
 #include <SFML/Graphics.hpp>
+#include "../include/Drawable.h"
 
 class Cannonball;
 
-class ShipEntity
+class ShipEntity : public Drawable
 {
 protected:
     sf::Image image;
@@ -20,8 +21,8 @@ protected:
 public:
     ShipEntity() {};
     ~ShipEntity() {};
+    void update();
     void Draw(sf::RenderWindow& window);
-    virtual void Update() = 0;
     virtual void Turn() {};
     virtual void Turn(int dir) {};
     virtual void Fire(std::vector<Cannonball*> &cannonballs) = 0;

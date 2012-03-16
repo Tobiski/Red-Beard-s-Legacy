@@ -63,8 +63,9 @@
 1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Enemy.h
 	"ShipEntity.h"
 
-1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/ShipEntity.h
+1331894556 /media/WorkPlace/Red-Beard-s-Legacy/include/ShipEntity.h
 	<SFML/Graphics.hpp>
+	"../include/Drawable.h"
 
 1331888284 /media/WorkPlace/Red-Beard-s-Legacy/include/Misc.h
 
@@ -72,7 +73,7 @@
 	"../include/Drawable.h"
 	"../include/Misc.h"
 
-1331891522 /media/WorkPlace/Red-Beard-s-Legacy/include/Drawable.h
+1331894990 /media/WorkPlace/Red-Beard-s-Legacy/include/Drawable.h
 	<SFML/Graphics.hpp>
 
 1331892050 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Enemy.cpp
@@ -95,4 +96,26 @@
 
 1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Ship.h
 	"ShipEntity.h"
+
+1331893598 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Monster.cpp
+	"../include/Monster.h"
+
+1331893626 /media/WorkPlace/Red-Beard-s-Legacy/include/Monster.h
+	"Drawable.h"
+
+1331892084 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Ship.cpp
+	<iostream>
+	"../include/Misc.h"
+	"../include/Ship.h"
+	"../include/Cannonball.h"
+	<algorithm>
+
+1331892084 source:/media/WorkPlace/Red-Beard-s-Legacy/src/ShipEntity.cpp
+	<SFML/Graphics.hpp>
+	"../include/ShipEntity.h"
+	"../include/Misc.h"
+
+1331892084 source:/media/WorkPlace/Red-Beard-s-Legacy/src/main.cpp
+	<iostream>
+	"../include/Game.h"
 

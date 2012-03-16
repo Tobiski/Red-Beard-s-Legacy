@@ -9,7 +9,7 @@ class Drawable
     public:
         Drawable();
         virtual ~Drawable();
-        virtual void update() = 0;
+        virtual void Update() = 0;
 
         void Draw(sf::RenderWindow &window);
         int GetArea();
@@ -19,7 +19,7 @@ class Drawable
         float GetXpos() { return posx; }
         float GetYpos() { return posy; }
         float GetAccel(){ return accel;}
-        float GetRotation() { return rotationAngle; }
+        float GetRotation() { return angle; }
         float GetWidth(){ return sprite.GetSize().x; }
         float GetHeight(){ return sprite.GetSize().y; }
 
@@ -32,7 +32,7 @@ class Drawable
         void SetRotation(float rot) { angle = rot; }
         void SetAcceleration(float acc) { accel = acc; }
 
-    private:
+    protected:
         sf::Image image;
         sf::Sprite sprite;
         sf::Clock spawnTime;
