@@ -179,7 +179,7 @@ void Game::Update()
 
     ship->Update();
 
-    if(ship->GetHeatlth() == 0)
+    if(ship->GetHealth() == 0)
     {
         GameOver();
     }
@@ -251,7 +251,7 @@ void Game::Update()
                     /* If cannonball belongs to player, check collision against enemy ships */
                     if(cannonballs[i]->GetId() != ENEMY)
                     {
-                        if(enemies[j]->GetHeatlth() > 1)
+                        if(enemies[j]->GetHealth() > 1)
                         {
                             enemies[j]->GetHit();
                             cannonballs.erase(cannonballs.begin()+i);
@@ -307,7 +307,7 @@ void Game::Render()
         sf::Color healthColor(0, 255, 0, 200);
         sf::Color transparent(0, 0, 0, 0);
         sf::Color borderColor(0, 0, 0, 255);
-        sf::Shape healthBar = sf::Shape::Rectangle(WIN_WIDTH - 120, 20, WIN_WIDTH - 120 + (ship->GetHeatlth()*20), 40, healthColor);
+        sf::Shape healthBar = sf::Shape::Rectangle(WIN_WIDTH - 120, 20, WIN_WIDTH - 120 + (ship->GetHealth()*20), 40, healthColor);
         sf::Shape borders = sf::Shape::Rectangle(WIN_WIDTH - 120, 20, WIN_WIDTH - 20, 40, transparent, 2, borderColor);
         window->Draw(healthBar);
         window->Draw(borders);

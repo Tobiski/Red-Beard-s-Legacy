@@ -27,11 +27,6 @@ void Cannonball::Update()
     sprite.SetPosition(posx, posy);
 }
 
-void Cannonball::Draw(sf::RenderWindow& window)
-{
-    window.Draw(sprite);
-}
-
 bool Cannonball::CheckCollision(ShipEntity &enemy)
 {
     if(posx + sprite.GetSize().x > enemy.GetXpos() - (enemy.GetWidth()/2) &&
@@ -44,25 +39,5 @@ bool Cannonball::CheckCollision(ShipEntity &enemy)
     else
     {
         return false;
-    }
-}
-
-int Cannonball::GetArea()
-{
-    if(posx < WIN_WIDTH / 2 && posy < WIN_HEIGHT / 2)
-    {
-        return 0;
-    }
-    else if(posx > WIN_WIDTH / 2 && posy < WIN_HEIGHT / 2)
-    {
-        return 1;
-    }
-    else if(posx < WIN_WIDTH / 2 && posy > WIN_HEIGHT / 2)
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
     }
 }

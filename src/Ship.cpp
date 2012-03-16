@@ -39,7 +39,7 @@ Ship::Ship(std::string imageDir, float posx, float posy)
     this->posy = posy;
     sprite.SetPosition(this->posx, this->posy);
     accel = 0;
-    rotationAngle = 0;
+    angle = 0;
     sprite.SetCenter(sprite.GetSize().x / 2, sprite.GetSize().y / 2);
     speedx = 0;
     speedy = 0;
@@ -52,11 +52,6 @@ Ship::Ship(std::string imageDir, float posx, float posy)
 
 Ship::~Ship()
 {
-}
-
-void Ship::Draw(sf::RenderWindow& window)
-{
-    window.Draw(sprite);
 }
 
 void Ship::Accel(int dir)
@@ -91,25 +86,25 @@ void Ship::Turn(int dir)
     switch(dir)
     {
     case 0:
-        rotationAngle++;
-        if(rotationAngle > 360)
+        angle++;
+        if(angle > 360)
         {
-            rotationAngle = 0;
+            angle = 0;
         }
         break;
     case 1:
-        rotationAngle--;
-        if(rotationAngle < 0)
+        angle--;
+        if(angle < 0)
         {
-            rotationAngle = 360;
+            angle = 360;
         }
     }
 }
 
 void Ship::Update()
 {
-    speedx = accel * sin(rotationAngle*3.14159265/180);
-    speedy = accel * cos(rotationAngle*3.14159265/180);
+    speedx = accel * sin(angle*3.14159265/180);
+    speedy = accel * cos(angle*3.14159265/180);
 
     if(posx+ speedx > 0 && posx+ speedx < WIN_WIDTH)
     {
@@ -126,7 +121,7 @@ void Ship::Update()
         cooldown--;
     }
 
-    sprite.SetRotation(rotationAngle*-1);
+    sprite.SetRotation(angle*-1);
     sprite.SetPosition(posx, posy);
 }
 
@@ -136,7 +131,7 @@ void Ship::Fire(std::vector<Cannonball*> &cannonballs)
     {
         cooldown = 80;
         cannonballsShot++;
-        cannonballs.push_back(new Cannonball(posx, posy, (rotationAngle+90), PLAYER));
+        cannonballs.push_back(new Cannonball(posx, posy, (angle+90), PLAYER));
     }
 }
 

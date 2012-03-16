@@ -20,7 +20,6 @@ public:
     Ship(std::string imageDir, float posx, float posy);
     ~Ship();
     void Update();
-    void Draw(sf::RenderWindow& window);
     void Accel(int dir);
     void Turn(int dir);
     void Fire(std::vector<Cannonball*> &cannonballs);

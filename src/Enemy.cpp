@@ -13,15 +13,15 @@ Enemy::Enemy()
     if(rand()%2 == 0)
     {
         posx = -50;
-        rotationAngle = 90;
+        angle = 90;
     }
     else
     {
         posx = WIN_WIDTH + 50;
-        rotationAngle = 270;
+        angle = 270;
     }
     posy = rand()%(WIN_HEIGHT - 200 ) + 100;
-    sprite.SetRotation(rotationAngle);
+    sprite.SetRotation(angle);
     sprite.SetPosition(posx, posy);
     turnTime = 600;
     turnDirection = 2;
@@ -35,16 +35,16 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-    speedx = sin(rotationAngle*3.14159265/180);
-    speedy = cos(rotationAngle*3.14159265/180);
+    speedx = sin(angle*3.14159265/180);
+    speedy = cos(angle*3.14159265/180);
 
     /* If ship has collided then we turn it to another direction for 1 sec */
     if(cTurnTime.GetElapsedTime() < 0.5 && forceTurn == true)
     {
         if(forceDirection == LEFT)
-            rotationAngle--;
+            angle--;
         else
-            rotationAngle++;
+            angle++;
     }
     else
     {
@@ -53,7 +53,7 @@ void Enemy::Update()
         Turn();
     }
 
-    if(posx + speedx > 50 && posx+ speedx < WIN_WIDTH - 50 || turnTime > 400)
+    if((posx + speedx > 50 && posx+ speedx < WIN_WIDTH - 50) || turnTime > 400)
     {
         if(posx < 100 || posx > WIN_WIDTH - 100)
             posx = posx + speedx*0.5;
@@ -69,7 +69,7 @@ void Enemy::Update()
             posy = posy + speedy*-1;
     }
 
-    sprite.SetRotation(rotationAngle*-1);
+    sprite.SetRotation(angle*-1);
     sprite.SetPosition(posx, posy);
     if(turnTime > 0)
     {
@@ -109,15 +109,11 @@ void Enemy::Turn()
     {
         if(turnDirection == RIGHT)
         {
-            rotationAngle++;
+            angle++;
         }
         else if(turnDirection == LEFT)
         {
-            rotationAngle--;
-        }
-        else
-        {
-            rotationAngle = rotationAngle;
+            angle--;
         }
     }
 }
@@ -128,7 +124,7 @@ void Enemy::Fire(std::vector<Cannonball*> &cannonballs)
     {
         if(rand()%3 == 0)
         {
-            cannonballs.push_back(new Cannonball(posx, posy, (rotationAngle+90), ENEMY));
+            cannonballs.push_back(new Cannonball(posx, posy, (angle+90), ENEMY));
         }
 
         shootTime.Reset();

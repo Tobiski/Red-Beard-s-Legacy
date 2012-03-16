@@ -16,23 +16,3 @@ bool ShipEntity::CheckCollision(ShipEntity &enemy)
         return false;
     }
 }
-
-int ShipEntity::GetArea()
-{
-    if(posx < WIN_WIDTH / 2 && posy < WIN_HEIGHT / 2)
-    {
-        return 0;
-    }
-    else if(posx > WIN_WIDTH / 2 && posy < WIN_HEIGHT / 2)
-    {
-        return 1;
-    }
-    else if(posx < WIN_WIDTH / 2 && posy > WIN_HEIGHT / 2)
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
-    }
-}
