@@ -7,7 +7,6 @@
 class Drawable
 {
     public:
-
         Drawable();
         virtual ~Drawable();
         virtual void update() = 0;
@@ -16,14 +15,23 @@ class Drawable
         int GetArea();
 
         /* Getters */
+        int GetHeal() { return health; }
         float GetXpos() { return posx; }
         float GetYpos() { return posy; }
         float GetAccel(){ return accel;}
         float GetRotation() { return rotationAngle; }
-        float GetWidth(){ return sprite.GetSize().x;}
-        float GetHeight(){ return sprite.GetSize().y;}
+        float GetWidth(){ return sprite.GetSize().x; }
+        float GetHeight(){ return sprite.GetSize().y; }
 
-    protected:
+        /* Settlers */
+        void SetHeal(int h) { health = h; }
+        void SetposX(float x) { posx = x; }
+        void SetposY(float y) { posy = y; }
+        void SetSpeedX(float x) { speedx = x; }
+        void SetSpeedY(float y) { speedy = y; }
+        void SetRotation(float rot) { angle = rot; }
+        void SetAcceleration(float acc) { accel = acc; }
+
     private:
         sf::Image image;
         sf::Sprite sprite;
@@ -33,7 +41,8 @@ class Drawable
         float accel;
         float speedx;
         float speedy;
-        float rotationAngle;
+        float angle;
+        int health;
 };
 
 #endif // DRAWABLE_H

@@ -52,3 +52,47 @@
 	"Enemy.h"
 	"Misc.h"
 
+1331891876 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Cannonball.cpp
+	"../include/Cannonball.h"
+	"../include/Enemy.h"
+	"../include/Misc.h"
+
+1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Cannonball.h
+	<SFML/Graphics.hpp>
+
+1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Enemy.h
+	"ShipEntity.h"
+
+1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/ShipEntity.h
+	<SFML/Graphics.hpp>
+
+1331888284 /media/WorkPlace/Red-Beard-s-Legacy/include/Misc.h
+
+1331891939 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Drawable.cpp
+	"../include/Drawable.h"
+	"../include/Misc.h"
+
+1331891522 /media/WorkPlace/Red-Beard-s-Legacy/include/Drawable.h
+	<SFML/Graphics.hpp>
+
+1331892050 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Enemy.cpp
+	<iostream>
+	"../include/Enemy.h"
+	"../include/Cannonball.h"
+	"../include/Misc.h"
+
+1331892050 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Game.cpp
+	<iostream>
+	"../include/Game.h"
+	"../include/Misc.h"
+	"../include/Ship.h"
+	"../include/Cannonball.h"
+	"../include/Enemy.h"
+
+1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Game.h
+	<vector>
+	<SFML/Graphics.hpp>
+
+1331888984 /media/WorkPlace/Red-Beard-s-Legacy/include/Ship.h
+	"ShipEntity.h"
+
