@@ -7,8 +7,11 @@
 class Drawable
 {
     public:
+
         Drawable();
         virtual ~Drawable();
+        virtual void update() = 0;
+
         void Draw(sf::RenderWindow &window);
         int GetArea();
 

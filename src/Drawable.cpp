@@ -1,5 +1,5 @@
-#include "Drawable.h"
-#include "Misc.h
+#include "../include/Drawable.h"
+#include "../include/Misc.h"
 
 Drawable::Drawable()
 {
@@ -9,7 +9,7 @@ Drawable::~Drawable()
 {
 }
 
-Drawable::Draw()
+void Drawable::Draw(sf::RenderWindow &window)
 {
     window.Draw(sprite);
 }
