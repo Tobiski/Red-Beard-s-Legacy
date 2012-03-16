@@ -4,3 +4,4 @@ obj/Release/
 bin/
 bin/Debug/
 bin/Release/
+images/*.psd
