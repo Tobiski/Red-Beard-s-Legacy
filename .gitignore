@@ -1,3 +1,6 @@
 obj/
 obj/Debug/
 obj/Release/
+bin/
+bin/Debug/
+bin/Release/
