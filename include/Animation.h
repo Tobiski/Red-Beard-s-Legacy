@@ -9,6 +9,7 @@ class Animation : public Drawable
         Animation(float posx, float posy, float angle, std::string imgDir, int maxFrames);
         ~Animation();
         void Update();
+        void Draw(sf::RenderWindow &window);
         int GetCurrentFrame() { return currentFrame; }
         int GetMaxFrames() { return maxFrames; }
     protected:

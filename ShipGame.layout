@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="include\Animation.h" open="1" top="0" tabpos="17">
+		<Cursor position="189" topLine="0" />
+	</File>
 	<File name="include\Cannonball.h" open="1" top="0" tabpos="13">
 		<Cursor position="393" topLine="0" />
 	</File>
 	<File name="include\Drawable.h" open="1" top="0" tabpos="3">
-		<Cursor position="236" topLine="0" />
+		<Cursor position="349" topLine="0" />
 	</File>
 	<File name="include\Enemy.h" open="1" top="0" tabpos="14">
 		<Cursor position="378" topLine="0" />
 	</File>
 	<File name="include\Game.h" open="1" top="0" tabpos="15">
-		<Cursor position="612" topLine="8" />
+		<Cursor position="331" topLine="0" />
+	</File>
+	<File name="include\Misc.h" open="1" top="0" tabpos="18">
+		<Cursor position="198" topLine="0" />
 	</File>
 	<File name="include\Monster.h" open="1" top="0" tabpos="9">
 		<Cursor position="63" topLine="0" />
@@ -22,23 +28,26 @@
 	<File name="include\ShipEntity.h" open="1" top="0" tabpos="11">
 		<Cursor position="485" topLine="0" />
 	</File>
+	<File name="src\Animation.cpp" open="1" top="0" tabpos="16">
+		<Cursor position="380" topLine="0" />
+	</File>
 	<File name="src\Cannonball.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="667" topLine="0" />
 	</File>
 	<File name="src\Drawable.cpp" open="1" top="0" tabpos="1">
 		<Cursor position="196" topLine="0" />
 	</File>
-	<File name="src\Enemy.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="1081" topLine="41" />
+	<File name="src\Enemy.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1081" topLine="35" />
 	</File>
-	<File name="src\Game.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="6064" topLine="213" />
+	<File name="src\Game.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="8646" topLine="289" />
 	</File>
 	<File name="src\Monster.cpp" open="1" top="0" tabpos="10">
 		<Cursor position="21" topLine="0" />
 	</File>
 	<File name="src\Ship.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="1109" topLine="23" />
+		<Cursor position="1109" topLine="0" />
 	</File>
 	<File name="src\ShipEntity.cpp" open="1" top="0" tabpos="7">
 		<Cursor position="563" topLine="0" />

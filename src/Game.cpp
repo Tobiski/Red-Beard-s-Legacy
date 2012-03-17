@@ -171,7 +171,7 @@ void Game::HandleInput()
         }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
         {
-            animations.push_back(new Animation(100, 100, 90, "images/ship.png", 5));
+            animations.push_back(new Animation(100, 100, 0, "images/shipAnimation.png", 10));
         }
     }
 
@@ -306,6 +306,7 @@ void Game::Update()
                         }
                         else
                         {
+                            animations.push_back(new Animation(enemies[j]->GetXpos(), enemies[j]->GetYpos(), enemies[j]->GetRotation(), "images/shipAnimation.png", 10));
                             enemies.erase(enemies.begin()+j);
                             cannonballs.erase(cannonballs.begin()+i);
                             ship->AddHit();

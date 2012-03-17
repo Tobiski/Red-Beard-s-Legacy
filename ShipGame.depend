@@ -145,7 +145,7 @@
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
-1331977769 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
+1331985338 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
 	<iostream>
 	"../include/Game.h"
 	"../include/Misc.h"
@@ -188,11 +188,11 @@
 	"../include/Enemy.h"
 	"../include/Misc.h"
 
-1331977908 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\animation.cpp
+1331985213 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\animation.cpp
 	<iostream>
 	"../include/Animation.h"
 	"../include/Misc.h"
 
-1331977891 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\animation.h
+1331984985 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\animation.h
 	"../include/Drawable.h"
 
