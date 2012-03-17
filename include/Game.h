@@ -10,6 +10,7 @@
 class Cannonball;
 class Ship;
 class Enemy;
+class Animation;
 
 class Game
 {
@@ -18,6 +19,7 @@ private:
     sf::Event event;
     bool running;
     Ship *ship;
+    std::vector<Animation*> animations;
     std::vector<Cannonball*> cannonballs;
     std::vector<Enemy*> enemies;
     sf::Font scoreFont;

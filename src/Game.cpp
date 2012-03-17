@@ -5,6 +5,7 @@
 #include "../include/Ship.h"
 #include "../include/Cannonball.h"
 #include "../include/Enemy.h"
+#include "../include/Animation.h"
 
 Game::Game()
 {
@@ -168,6 +169,10 @@ void Game::HandleInput()
         {
             enemies.push_back(new Enemy());
         }
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
+        {
+            animations.push_back(new Animation(100, 100, 90, "images/ship.png", 5));
+        }
     }
 
     if(gameState == PLAYING)
@@ -221,6 +226,19 @@ void Game::Update()
     {
         enemies[i]->Update();
         enemies[i]->Fire(cannonballs);
+    }
+
+    /* Update animations */
+
+    for(int i = 0; i < animations.size(); i++)
+    {
+        animations[i]->Update();
+    }
+
+    for(int i = 0; i < animations.size(); i++)
+    {
+        if(animations[i]->GetCurrentFrame() == animations[i]->GetMaxFrames())
+            animations.erase(animations.begin() + i);
     }
 
     /* START CHECKING COLLISION */
@@ -326,9 +344,15 @@ void Game::Render()
         {
             enemies[i]->Draw(*window);
         }
+
         for(int i = 0; i < cannonballs.size(); i++)
         {
             cannonballs[i]->Draw(*window);
+        }
+
+        for(int i = 0; i < animations.size(); i++)
+        {
+            animations[i]->Draw(*window);
         }
 
         sf::Color healthColor(0, 255, 0, 200);

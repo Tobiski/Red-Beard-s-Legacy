@@ -8,5 +8,6 @@
 #define WIN_WIDTH 1024
 #define WIN_HEIGHT 768
 #define WIN_BPP 32
+#define MAX_FPS 80
 
 #endif

@@ -126,7 +126,7 @@
 1331895615 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\drawable.h
 	<SFML/Graphics.hpp>
 
-1331893663 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\misc.h
+1331977083 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\misc.h
 
 1331896988 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\enemy.cpp
 	<iostream>
@@ -145,15 +145,16 @@
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
-1331898770 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
+1331977769 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
 	<iostream>
 	"../include/Game.h"
 	"../include/Misc.h"
 	"../include/Ship.h"
 	"../include/Cannonball.h"
 	"../include/Enemy.h"
+	"../include/Animation.h"
 
-1331898653 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\game.h
+1331977291 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\game.h
 	<vector>
 	<SFML/Graphics.hpp>
 
@@ -186,4 +187,12 @@
 	"../include/Cannonball.h"
 	"../include/Enemy.h"
 	"../include/Misc.h"
+
+1331977908 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\animation.cpp
+	<iostream>
+	"../include/Animation.h"
+	"../include/Misc.h"
+
+1331977891 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\animation.h
+	"../include/Drawable.h"
 
