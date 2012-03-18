@@ -3,6 +3,8 @@
 
 #include "Drawable.h"
 
+enum MonsterType { OCTOPUSSY, SNAKE, JELLYFISH };
+
 class Monster : public Drawable
 {
     public:
@@ -10,6 +12,7 @@ class Monster : public Drawable
         virtual ~Monster();
     protected:
     private:
+        MonsterType monsterType;
 };
 
 #endif // MONSTER_H
