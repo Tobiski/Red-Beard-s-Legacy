@@ -490,24 +490,24 @@ void Game::Render()
     {
         window->Clear();
 
-        sf::String pausedText("HARBOR", scoreFont, 42);
-        pausedText.SetColor(sf::Color(255, 255, 255, 200));
-        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
-        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+        sf::String harborText("HARBOR", scoreFont, 42);
+        harborText.SetColor(sf::Color(255, 255, 255, 200));
+        harborText.SetCenter(harborText.GetSize(), harborText.GetSize());
+        harborText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
 
-        sf::String resumeText("Market", scoreFont, 36);
-        resumeText.SetColor(sf::Color(255, 255, 255, 200));
-        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
-        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+        sf::String marketText("Market", scoreFont, 36);
+        marketText.SetColor(sf::Color(255, 255, 255, 200));
+        marketText.SetCenter(marketText.GetSize(), marketText.GetSize());
+        marketText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
 
-        sf::String mainmenuText("Leave harbor", scoreFont, 36);
-        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
-        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
-        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+        sf::String leaveHarborText("Leave harbor", scoreFont, 36);
+        leaveHarborText.SetColor(sf::Color(255, 255, 255, 200));
+        leaveHarborText.SetCenter(leaveHarborText.GetSize(), leaveHarborText.GetSize());
+        leaveHarborText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
 
-        window->Draw(pausedText);
-        window->Draw(resumeText);
-        window->Draw(mainmenuText);
+        window->Draw(harborText);
+        window->Draw(marketText);
+        window->Draw(leaveHarborText);
 
         if(harborSelect == ENTER_MARKET)
         {
@@ -524,29 +524,29 @@ void Game::Render()
     {
         window->Clear();
 
-        sf::String pausedText("MARKET", scoreFont, 42);
-        pausedText.SetColor(sf::Color(255, 255, 255, 200));
-        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
-        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+        sf::String marketText("MARKET", scoreFont, 42);
+        marketText.SetColor(sf::Color(255, 255, 255, 200));
+        marketText.SetCenter(marketText.GetSize(), marketText.GetSize());
+        marketText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
 
-        sf::String resumeText("Repair ship", scoreFont, 36);
-        resumeText.SetColor(sf::Color(255, 255, 255, 200));
-        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
-        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+        sf::String repairText("Repair ship", scoreFont, 36);
+        repairText.SetColor(sf::Color(255, 255, 255, 200));
+        repairText.SetCenter(repairText.GetSize(), repairText.GetSize());
+        repairText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
 
-        sf::String mainmenuText("Upgrade cannons", scoreFont, 36);
-        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
-        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
-        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+        sf::String upgradeText("Upgrade cannons", scoreFont, 36);
+        upgradeText.SetColor(sf::Color(255, 255, 255, 200));
+        upgradeText.SetCenter(upgradeText.GetSize(), upgradeText.GetSize());
+        upgradeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
 
         sf::String leaveMarketText("Leave market", scoreFont, 36);
         leaveMarketText.SetColor(sf::Color(255, 255, 255, 200));
         leaveMarketText.SetCenter(leaveMarketText.GetSize(), leaveMarketText.GetSize());
         leaveMarketText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 150);
 
-        window->Draw(pausedText);
-        window->Draw(resumeText);
-        window->Draw(mainmenuText);
+        window->Draw(marketText);
+        window->Draw(repairText);
+        window->Draw(upgradeText);
         window->Draw(leaveMarketText);
 
         if(marketSelect == REPAIR)

@@ -50,6 +50,7 @@
 		<Unit filename="include\Monster.h" />
 		<Unit filename="include\Ship.h" />
 		<Unit filename="include\ShipEntity.h" />
+		<Unit filename="include\SwordFight.h" />
 		<Unit filename="src\Animation.cpp" />
 		<Unit filename="src\Cannonball.cpp" />
 		<Unit filename="src\Drawable.cpp" />
@@ -58,6 +59,7 @@
 		<Unit filename="src\Monster.cpp" />
 		<Unit filename="src\Ship.cpp" />
 		<Unit filename="src\ShipEntity.cpp" />
+		<Unit filename="src\SwordFight.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
 			<code_completion />
