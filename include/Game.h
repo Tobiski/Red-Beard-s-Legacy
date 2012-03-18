@@ -11,6 +11,7 @@ class Cannonball;
 class Ship;
 class Enemy;
 class Animation;
+class Monster;
 
 class Game
 {
@@ -33,6 +34,8 @@ private:
     sf::Sprite pauseSkullSprite;
     sf::Image pirateImage;
     sf::Sprite pirateSprite;
+    sf::Sprite seaSprite;
+    sf::Image seaImage;
     int spawnCooldown;
     enum MENUSELECT {START, QUIT};
     MENUSELECT menuSelect;
@@ -40,6 +43,9 @@ private:
     PAUSESELECT pauseSelect;
     enum GAMESTATE {MAINMENU, PLAYING, PAUSED, GAMEOVER};
     GAMESTATE gameState;
+    std::clock_t monsterTimer;
+    double delta;
+    Monster *monster;
 
 public:
     Game();

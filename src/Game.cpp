@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 #include "../include/Game.h"
 #include "../include/Misc.h"
@@ -6,6 +7,7 @@
 #include "../include/Cannonball.h"
 #include "../include/Enemy.h"
 #include "../include/Animation.h"
+#include "../include/Monster.h"
 
 Game::Game()
 {
@@ -22,6 +24,7 @@ Game::~Game()
 
 void Game::Init()
 {
+    monsterTimer = std::clock();
     scoreFont.LoadFromFile("Treamd.ttf");
 
     menuImage.LoadFromFile("images/menu.png");
@@ -196,6 +199,13 @@ void Game::HandleInput()
 
 void Game::Update()
 {
+    /* Check if we can create a monster */
+    delta = (std::clock() - monsterTimer) / (double)CLOCKS_PER_SEC;
+    if(delta > 1 && monster == NULL)
+    {
+        monster = new Monster();
+    }
+
     if(enemies.size() < 5 && spawnCooldown == 0)
     {
         enemies.push_back(new Enemy());
@@ -339,7 +349,7 @@ void Game::Render()
     }
     else if(gameState == PLAYING)
     {
-        window->Clear(sf::Color(0, 90, 255));
+        window->Draw()
         ship->Draw(*window);
         for(int i = 0; i < enemies.size(); i++)
         {
@@ -370,6 +380,10 @@ void Game::Render()
         window->Draw(scoreText);
 
         window->Draw(pirateSprite);
+        if(monster != NULL)
+        {
+            monster->Draw(*window);
+        }
     }
     else if(gameState == PAUSED)
     {

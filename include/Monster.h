@@ -10,6 +10,7 @@ class Monster : public Drawable
     public:
         Monster();
         virtual ~Monster();
+        void Update();
     protected:
     private:
         MonsterType monsterType;
