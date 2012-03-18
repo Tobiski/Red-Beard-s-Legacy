@@ -289,3 +289,16 @@
 	<iostream>
 	"../include/Game.h"
 
+1332092182 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordFight.cpp
+	"../include/SwordFight.h"
+
+1332092239 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordFight.h
+	<SFML/Graphics.hpp>
+	"../include/SwordMan.h"
+
+1332094344 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordMan.h
+	"../include/Drawable.h"
+
+1332086966 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordMan.cpp
+	"../include/SwordMan.h"
+
