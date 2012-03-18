@@ -200,16 +200,22 @@ void Game::HandleInput()
             else if(gameState == HARBOR && harborSelect == ENTER_MARKET)
                 gameState = MARKET;
             else if(gameState == HARBOR && harborSelect == EXIT_HARBOR)
+            {
                 gameState = PLAYING;
+                harborSelect = ENTER_MARKET;
+            }
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
-                std::cout << "Repairing ship" << std::endl;
-                ship->Repair();
+                if(ship->GetHealth() < 5)
+                    ship->Repair();
             }
             else if(gameState == MARKET && marketSelect == UPGRADE)
                 std::cout << "Upgrading cannons" << std::endl;
             else if(gameState == MARKET && marketSelect == EXIT_MARKET)
+            {
                 gameState = HARBOR;
+                marketSelect = REPAIR;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::S && gameState == PLAYING)
