@@ -55,6 +55,8 @@ void Game::Init()
 
     gameState = MAINMENU;
     menuSelect = START;
+    harborSelect = ENTER_MARKET;
+    marketSelect = REPAIR;
 
     spawnCooldown = 0;
     running = true;
@@ -92,9 +94,9 @@ void Game::GameLoop()
             Update();
             Render();
         }
-        else if(gameState == PAUSED)
+        else if(gameState == PAUSED || gameState == HARBOR || gameState == MARKET)
         {
-            /* Display pause menu*/
+            /* Display pause menu, Harbor menu or Market menu*/
             HandleInput();
             Render();
         }
@@ -135,6 +137,18 @@ void Game::HandleInput()
                 if(pauseSelect == RESUME)
                     pauseSelect = MENU;
             }
+            else if(gameState == HARBOR)
+            {
+                if(harborSelect == ENTER_MARKET)
+                    harborSelect = EXIT_HARBOR;
+            }
+            else if(gameState == MARKET)
+            {
+                if(marketSelect == REPAIR)
+                    marketSelect = UPGRADE;
+                else if(marketSelect == UPGRADE)
+                    marketSelect = EXIT_MARKET;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Up)
@@ -148,6 +162,18 @@ void Game::HandleInput()
             {
                 if(pauseSelect == MENU)
                     pauseSelect = RESUME;
+            }
+            else if(gameState == HARBOR)
+            {
+                if(harborSelect == EXIT_HARBOR)
+                    harborSelect = ENTER_MARKET;
+            }
+            else if(gameState == MARKET)
+            {
+                if(marketSelect == UPGRADE)
+                    marketSelect = REPAIR;
+                else if(marketSelect == EXIT_MARKET)
+                    marketSelect = UPGRADE;
             }
         }
 
@@ -171,6 +197,19 @@ void Game::HandleInput()
                 gameState = MAINMENU;
                 ship = new Ship("images/ship.png", 100, 100);
             }
+            else if(gameState == HARBOR && harborSelect == ENTER_MARKET)
+                gameState = MARKET;
+            else if(gameState == HARBOR && harborSelect == EXIT_HARBOR)
+                gameState = PLAYING;
+            else if(gameState == MARKET && marketSelect == REPAIR)
+            {
+                std::cout << "Repairing ship" << std::endl;
+                ship->Repair();
+            }
+            else if(gameState == MARKET && marketSelect == UPGRADE)
+                std::cout << "Upgrading cannons" << std::endl;
+            else if(gameState == MARKET && marketSelect == EXIT_MARKET)
+                gameState = HARBOR;
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::S && gameState == PLAYING)
@@ -180,6 +219,10 @@ void Game::HandleInput()
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::M && gameState == PLAYING)
         {
             monster = new Monster();
+        }
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::W && gameState == PLAYING)
+        {
+            gameState = HARBOR;
         }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
         {
@@ -423,6 +466,85 @@ void Game::Render()
         window->Draw(pirateSprite);
 
     }
+
+    else if(gameState == HARBOR)
+    {
+        window->Clear();
+
+        sf::String pausedText("HARBOR", scoreFont, 42);
+        pausedText.SetColor(sf::Color(255, 255, 255, 200));
+        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
+        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+
+        sf::String resumeText("Market", scoreFont, 36);
+        resumeText.SetColor(sf::Color(255, 255, 255, 200));
+        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
+        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+
+        sf::String mainmenuText("Leave harbor", scoreFont, 36);
+        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
+        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
+        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+
+        window->Draw(pausedText);
+        window->Draw(resumeText);
+        window->Draw(mainmenuText);
+
+        if(harborSelect == ENTER_MARKET)
+        {
+            pauseSkullSprite.SetPosition(420, 400);
+        }
+        else if(harborSelect == EXIT_HARBOR)
+        {
+            pauseSkullSprite.SetPosition(420, 450);
+        }
+        window->Draw(pauseSkullSprite);
+    }
+
+    else if(gameState == MARKET)
+    {
+        window->Clear();
+
+        sf::String pausedText("MARKET", scoreFont, 42);
+        pausedText.SetColor(sf::Color(255, 255, 255, 200));
+        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
+        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+
+        sf::String resumeText("Repair ship", scoreFont, 36);
+        resumeText.SetColor(sf::Color(255, 255, 255, 200));
+        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
+        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+
+        sf::String mainmenuText("Upgrade cannons", scoreFont, 36);
+        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
+        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
+        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+
+        sf::String leaveMarketText("Leave market", scoreFont, 36);
+        leaveMarketText.SetColor(sf::Color(255, 255, 255, 200));
+        leaveMarketText.SetCenter(leaveMarketText.GetSize(), leaveMarketText.GetSize());
+        leaveMarketText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 150);
+
+        window->Draw(pausedText);
+        window->Draw(resumeText);
+        window->Draw(mainmenuText);
+        window->Draw(leaveMarketText);
+
+        if(marketSelect == REPAIR)
+        {
+            pauseSkullSprite.SetPosition(420, 400);
+        }
+        else if(marketSelect == UPGRADE)
+        {
+            pauseSkullSprite.SetPosition(420, 450);
+        }
+        else if(marketSelect == EXIT_MARKET)
+        {
+            pauseSkullSprite.SetPosition(420, 500);
+        }
+        window->Draw(pauseSkullSprite);
+    }
+
     else if(gameState == PAUSED)
     {
         window->Clear();
