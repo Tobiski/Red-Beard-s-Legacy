@@ -1,5 +1,6 @@
 #include "../include/Monster.h"
 #include "../include/Misc.h"
+#include <iostream>
 
 Monster::Monster()
 {
@@ -8,15 +9,15 @@ Monster::Monster()
     {
         case OCTOPUSSY:
             monsterType = OCTOPUSSY;
-            image.LoadFromFile("images/octupus.png");
+            image.LoadFromFile("images/octopus.png");
             break;
         case SNAKE:
             monsterType = SNAKE;
-            image.LoadFromFile("images/octupus.png");
+            image.LoadFromFile("images/octopus.png");
             break;
         case JELLYFISH:
             monsterType = JELLYFISH;
-            image.LoadFromFile("images/octupus.png");
+            image.LoadFromFile("images/octopus.png");
             break;
     }
 
@@ -33,15 +34,23 @@ Monster::Monster()
     angle = 0;
     speedx = 0;
     speedy = 0;
-    if(monsterType == OCTOPUSSY) health = 5;
-    else if(monsterType == SNAKE) health = 4;
-    else health = 3;
+    if(monsterType == OCTOPUSSY) health = 2;
+    else if(monsterType == SNAKE) health = 1;
+    else health = 1;
 }
 
 Monster::~Monster()
 {
 }
 
-void Monster::Update() {
+void Monster::Update(float playerX, float playerY)
+{
+    if(playerX > posx) posx++;
+    else posx--;
+
+    if(playerY > posy) posy++;
+    else posy--;
+
+    sprite.SetPosition(posx, posy);
 }
 

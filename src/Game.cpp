@@ -24,12 +24,17 @@ Game::~Game()
 
 void Game::Init()
 {
+    monster = NULL;
     monsterTimer = std::clock();
     scoreFont.LoadFromFile("Treamd.ttf");
 
     menuImage.LoadFromFile("images/menu.png");
     menuSprite.SetImage(menuImage);
     menuSprite.SetPosition(0,0);
+
+    seaImage.LoadFromFile("images/sea.png");
+    seaSprite.SetImage(seaImage);
+    seaSprite.SetPosition(0,0);
 
     gameOverImage.LoadFromFile("images/gameover.png");
     gameOverSprite.SetImage(gameOverImage);
@@ -206,6 +211,11 @@ void Game::Update()
         monster = new Monster();
     }
 
+    if(monster != NULL)
+    {
+        monster->Update(ship->GetXpos(), ship->GetYpos());
+    }
+
     if(enemies.size() < 5 && spawnCooldown == 0)
     {
         enemies.push_back(new Enemy());
@@ -239,7 +249,6 @@ void Game::Update()
     }
 
     /* Update animations */
-
     for(int i = 0; i < animations.size(); i++)
     {
         animations[i]->Update();
@@ -251,7 +260,7 @@ void Game::Update()
             animations.erase(animations.begin() + i);
     }
 
-    /* START CHECKING COLLISION */
+    /* Start checking collision */
     for(int i = 0; i < enemies.size(); i++)
     {
         for(int j = 0; j < enemies.size(); j++)
@@ -260,12 +269,14 @@ void Game::Update()
             {
                 continue;
             }
-            if(i != j)	// check that ships don't collide with themselfs
+            if(i != j)// check that ships don't collide with themselfs
+            {
                 if(enemies[i]->CheckCollision(*enemies[j]))
                 {
                     enemies[i]->ForceTurn(LEFT);
                     enemies[j]->ForceTurn(RIGHT);
                 }
+            }
         }
     }
 
@@ -349,7 +360,13 @@ void Game::Render()
     }
     else if(gameState == PLAYING)
     {
-        window->Draw()
+        window->Draw(seaSprite);
+
+        if(monster != NULL)
+        {
+            monster->Draw(*window);
+        }
+
         ship->Draw(*window);
         for(int i = 0; i < enemies.size(); i++)
         {
@@ -380,10 +397,7 @@ void Game::Render()
         window->Draw(scoreText);
 
         window->Draw(pirateSprite);
-        if(monster != NULL)
-        {
-            monster->Draw(*window);
-        }
+
     }
     else if(gameState == PAUSED)
     {

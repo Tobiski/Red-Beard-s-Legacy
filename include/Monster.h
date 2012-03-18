@@ -10,7 +10,8 @@ class Monster : public Drawable
     public:
         Monster();
         virtual ~Monster();
-        void Update();
+        void Update(float playerX, float playerY);
+        void Update() {}
     protected:
     private:
         MonsterType monsterType;
