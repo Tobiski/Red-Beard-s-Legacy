@@ -15,6 +15,7 @@ private:
     int lastDirection;
     int forceDirection;
     int originalRotation;
+    bool intruder;
 public:
     Enemy();
     ~Enemy();
@@ -23,6 +24,9 @@ public:
     void Turn();
     void Fire(std::vector<Cannonball*> &cannonballs);
     void ForceTurn(int dir); // ship has collided with another shipol
+
+    bool GetIntruder() { return intruder; }
+    void SetIntruder(bool intr) { intruder = intr; }
 };
 
 #endif

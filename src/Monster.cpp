@@ -4,7 +4,7 @@
 
 Monster::Monster()
 {
-    // Create a monster type
+    // Choose a monster type
     switch(rand()%3)
     {
         case OCTOPUSSY:
@@ -24,12 +24,13 @@ Monster::Monster()
     image.SetSmooth(false);
     sprite.SetImage(image);
 
-    // Create a random place for monster
-    posx = rand()%WIN_WIDTH-1;
-    posy = rand()%WIN_HEIGHT-1;
+    // Choose a random place for monster
+    posx = rand()%WIN_WIDTH;
+    posy = rand()%WIN_HEIGHT;
     sprite.SetPosition(posx,posy);
     sprite.SetCenter(sprite.GetSize().x / 2, sprite.GetSize().y / 2);
 
+    accelState = INCREASE;
     accel = 0;
     angle = 0;
     speedx = 0;
@@ -45,11 +46,51 @@ Monster::~Monster()
 
 void Monster::Update(float playerX, float playerY)
 {
-    if(playerX > posx) posx++;
-    else posx--;
+    switch(monsterType)
+    {
+        case OCTOPUSSY:
+            if(playerX > posx) posx++;
+            else posx--;
 
-    if(playerY > posy) posy++;
-    else posy--;
+            if(playerY > posy) posy++;
+            else posy--;
+
+            break;
+        case SNAKE:
+            if(playerX > posx) posx++;
+            else posx--;
+
+            if(playerY > posy) posy++;
+            else posy--;
+            break;
+        case JELLYFISH:
+            if(accelState == INCREASE)
+            {
+                if(accel < 2)
+                    accel += 0.1;
+                else
+                    accelState = DECREASE;
+            }
+            else
+            {
+                if(accel > 0)
+                    accel -= 0.1;
+                else
+                    accelState = INCREASE;
+            }
+
+            if(playerX > posx)
+                posx += accel;
+            else
+                posx -= accel;
+
+            if(playerY > posy)
+                posy += accel;
+            else
+                posy -= accel;
+            break;
+    }
+
 
     sprite.SetPosition(posx, posy);
 }

@@ -4,6 +4,7 @@
 #include "Drawable.h"
 
 enum MonsterType { OCTOPUSSY, SNAKE, JELLYFISH };
+enum Acceleration { DECREASE, INCREASE };
 
 class Monster : public Drawable
 {
@@ -15,6 +16,7 @@ class Monster : public Drawable
     protected:
     private:
         MonsterType monsterType;
+        Acceleration accelState;
 };
 
 #endif // MONSTER_H
