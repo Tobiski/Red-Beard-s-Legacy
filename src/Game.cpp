@@ -301,6 +301,7 @@ void Game::Update()
         {
             cannonballs[i]->Update();
 
+            /* Check collision against monster */
             if(monster != NULL)
             {
                 if(cannonballs[i]->CheckCollision(*monster))
@@ -320,7 +321,6 @@ void Game::Update()
 
             for(int j = 0; j < enemies.size() ; j++)
             {
-
                 if(cannonballs[i]->GetArea() != enemies[j]->GetArea())
                 {
                     continue;
