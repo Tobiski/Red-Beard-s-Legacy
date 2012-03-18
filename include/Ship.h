@@ -31,6 +31,10 @@ public:
     {
         shipsHit++;
     }
+    void Repair()
+    {
+        health++;
+    }
     std::string GetInfo();
     std::string GetScore();
 };

@@ -7,6 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 
+enum MENUSELECT { START, QUIT };
+enum PAUSESELECT { RESUME, MENU };
+enum HARBORSELECT { ENTER_MARKET, EXIT_HARBOR };
+enum MARKETSELECT { REPAIR, UPGRADE, EXIT_MARKET };
+enum GAMESTATE { MAINMENU, PLAYING, PAUSED, HARBOR, MARKET, GAMEOVER };
+
 class Cannonball;
 class Ship;
 class Enemy;
@@ -37,12 +43,12 @@ private:
     sf::Sprite seaSprite;
     sf::Image seaImage;
     int spawnCooldown;
-    enum MENUSELECT {START, QUIT};
     MENUSELECT menuSelect;
-    enum PAUSESELECT {RESUME, MENU};
     PAUSESELECT pauseSelect;
-    enum GAMESTATE {MAINMENU, PLAYING, PAUSED, GAMEOVER};
     GAMESTATE gameState;
+    HARBORSELECT harborSelect;
+    MARKETSELECT marketSelect;
+
     std::clock_t monsterTimer;
     double delta;
     Monster *monster;
