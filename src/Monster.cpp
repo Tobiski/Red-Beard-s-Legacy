@@ -1,5 +1,6 @@
 #include "../include/Monster.h"
 #include "../include/Misc.h"
+#include "../include/ShipEntity.h"
 #include <iostream>
 
 Monster::Monster()
@@ -93,4 +94,19 @@ void Monster::Update(float playerX, float playerY)
 
 
     sprite.SetPosition(posx, posy);
+}
+
+bool Monster::CheckCollision(ShipEntity &enemy)
+{
+    if(posx + sprite.GetSize().x > enemy.GetXpos() - (enemy.GetWidth()/2) &&
+            posx < enemy.GetXpos() + enemy.GetWidth() - (enemy.GetWidth()/2) &&
+            posy + sprite.GetSize().y > enemy.GetYpos() - (enemy.GetHeight()/2) &&
+            posy < enemy.GetYpos() + enemy.GetHeight() - (enemy.GetHeight()/2))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

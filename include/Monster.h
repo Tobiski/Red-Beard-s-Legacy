@@ -6,6 +6,8 @@
 enum MonsterType { OCTOPUSSY, SNAKE, JELLYFISH };
 enum Acceleration { DECREASE, INCREASE };
 
+class ShipEntity;
+
 class Monster : public Drawable
 {
     public:
@@ -13,6 +15,7 @@ class Monster : public Drawable
         virtual ~Monster();
         void Update(float playerX, float playerY);
         void Update() {}
+        bool CheckCollision(ShipEntity &ship);
     protected:
     private:
         MonsterType monsterType;

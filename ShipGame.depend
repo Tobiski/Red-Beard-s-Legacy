@@ -151,7 +151,7 @@
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
-1332088262 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
+1332089558 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
 	<iostream>
 	<time.h>
 	"../include/Game.h"
@@ -185,12 +185,13 @@
 	<iostream>
 	"../include/Game.h"
 
-1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\monster.cpp
+1332089592 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\monster.cpp
 	"../include/Monster.h"
 	"../include/Misc.h"
+	"../include/ShipEntity.h"
 	<iostream>
 
-1332086211 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\monster.h
+1332089571 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\monster.h
 	"Drawable.h"
 
 1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\cannonball.cpp
@@ -292,4 +293,10 @@
 1332073129 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\main.cpp
 	<iostream>
 	"../include/Game.h"
+
+1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\swordfight.cpp
+	"../include/SwordFight.h"
+
+1332086211 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\swordfight.h
+	<SFML/Graphics.hpp>
 

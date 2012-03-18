@@ -330,6 +330,19 @@ void Game::Update()
         }
     }
 
+    /* Check monster collision against player's ship */
+    if(monster != NULL)
+    {
+        if(monster->CheckCollision(*ship))
+        {
+            ship->GetHit();
+            ship->GetHit();
+            delete monster;
+            monster = NULL;
+            monsterTimer = std::clock();
+        }
+    }
+
     /* Check cannonball live against ships */
     for(int i = 0; i < cannonballs.size(); i++)
     {
@@ -344,7 +357,7 @@ void Game::Update()
         {
             cannonballs[i]->Update();
 
-            /* Check collision against monster */
+            /* Check cannonball collision against monster */
             if(monster != NULL)
             {
                 if(cannonballs[i]->CheckCollision(*monster))
