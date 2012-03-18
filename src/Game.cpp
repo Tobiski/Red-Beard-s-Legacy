@@ -210,7 +210,7 @@ void Game::Update()
 {
     /* Check if we can create a monster */
     delta = (std::clock() - monsterTimer) / (double)CLOCKS_PER_SEC;
-    if(delta > 1 && monster == NULL)
+    if(delta > 10 && monster == NULL)
     {
         if(rand()%4 == 0)
         {

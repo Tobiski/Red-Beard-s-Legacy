@@ -6,3 +6,4 @@ bin/Debug/
 bin/Release/
 images/*.psd
 *.dll
+*.layout

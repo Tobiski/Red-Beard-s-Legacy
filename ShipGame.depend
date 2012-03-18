@@ -218,24 +218,24 @@
 1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\animation.h
 	"../include/Drawable.h"
 
-1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\drawable.h
+1332080687 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\drawable.h
 	<SFML/Graphics.hpp>
 
 1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\misc.h
 
-1332073129 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\cannonball.cpp
+1332080687 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\cannonball.cpp
 	"../include/Cannonball.h"
 	"../include/Enemy.h"
 	"../include/Misc.h"
 
-1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\cannonball.h
+1332080687 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\cannonball.h
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
 1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\enemy.h
 	"ShipEntity.h"
 
-1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\shipentity.h
+1332080687 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\shipentity.h
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
@@ -258,18 +258,19 @@
 	"../include/Enemy.h"
 	"../include/Animation.h"
 
-1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\game.h
+1332080687 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\game.h
 	<vector>
 	<SFML/Graphics.hpp>
 
 1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\ship.h
 	"ShipEntity.h"
 
-1332073129 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\monster.cpp
+1332080687 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\monster.cpp
 	"../include/Monster.h"
 	"../include/Misc.h"
+	<iostream>
 
-1332073129 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\monster.h
+1332080687 c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\include\monster.h
 	"Drawable.h"
 
 1332073129 source:c:\users\tobijas\documents\projects\games\shipgame\red-beard-s-legacy\src\ship.cpp
