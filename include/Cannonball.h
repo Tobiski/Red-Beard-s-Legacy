@@ -16,7 +16,7 @@ public:
     Cannonball(float posx, float posy, float direction, int id);
     ~Cannonball();
     void Update();
-    bool CheckCollision(ShipEntity &enemy);
+    bool CheckCollision(Drawable &enemy);
     float GetTime()
     {
         return spawnTime.GetElapsedTime();

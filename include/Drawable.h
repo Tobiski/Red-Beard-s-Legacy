@@ -13,9 +13,10 @@ class Drawable
 
         void Draw(sf::RenderWindow &window);
         int GetArea();
+        void GetHit() { health--; }
 
         /* Getters */
-        int GetHeal() { return health; }
+        int GetHealth() { return health; }
         float GetXpos() { return posx; }
         float GetYpos() { return posy; }
         float GetAccel(){ return accel;}
@@ -24,7 +25,7 @@ class Drawable
         float GetHeight(){ return sprite.GetSize().y; }
 
         /* Settlers */
-        void SetHeal(int h) { health = h; }
+        void SetHealth(int h) { health = h; }
         void SetposX(float x) { posx = x; }
         void SetposY(float y) { posy = y; }
         void SetSpeedX(float x) { speedx = x; }

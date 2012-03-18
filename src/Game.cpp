@@ -177,6 +177,10 @@ void Game::HandleInput()
         {
             enemies.push_back(new Enemy());
         }
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::M && gameState == PLAYING)
+        {
+            monster = new Monster();
+        }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
         {
             animations.push_back(new Animation(100, 100, 0, "images/shipAnimation.png", 10));
@@ -293,6 +297,23 @@ void Game::Update()
         else
         {
             cannonballs[i]->Update();
+
+            if(monster != NULL)
+            {
+                if(cannonballs[i]->CheckCollision(*monster))
+                {
+                    ship->AddScore();
+                    cannonballs.erase(cannonballs.begin()+i);
+                    monster->GetHit();
+                    if(monster->GetHealth() == 0)
+                    {
+                        delete monster;
+                        monster = NULL;
+                        monsterTimer = std::clock();
+                    }
+                    break;
+                }
+            }
 
             for(int j = 0; j < enemies.size() ; j++)
             {

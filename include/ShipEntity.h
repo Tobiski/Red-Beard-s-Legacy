@@ -15,14 +15,6 @@ public:
     virtual void Turn() {};
     virtual void Turn(int dir) {};
     virtual void Fire(std::vector<Cannonball*> &cannonballs) = 0;
-    int GetHealth()
-    {
-        return health;
-    }
-    void GetHit()
-    {
-        health--;
-    }
     bool CheckCollision(ShipEntity &ship);
 };
 

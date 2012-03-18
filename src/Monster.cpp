@@ -53,4 +53,3 @@ void Monster::Update(float playerX, float playerY)
 
     sprite.SetPosition(posx, posy);
 }
-
