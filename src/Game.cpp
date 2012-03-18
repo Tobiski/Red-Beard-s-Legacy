@@ -212,7 +212,10 @@ void Game::Update()
     delta = (std::clock() - monsterTimer) / (double)CLOCKS_PER_SEC;
     if(delta > 1 && monster == NULL)
     {
-        monster = new Monster();
+        if(rand()%4 == 0)
+        {
+            monster = new Monster();
+        }
     }
 
     if(monster != NULL)
