@@ -294,9 +294,24 @@
 	<iostream>
 	"../include/Game.h"
 
+<<<<<<< HEAD
 1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\swordfight.cpp
 	"../include/SwordFight.h"
 
 1332086211 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\swordfight.h
 	<SFML/Graphics.hpp>
+=======
+1332092182 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordFight.cpp
+	"../include/SwordFight.h"
+
+1332092239 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordFight.h
+	<SFML/Graphics.hpp>
+	"../include/SwordMan.h"
+
+1332094344 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordMan.h
+	"../include/Drawable.h"
+
+1332086966 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordMan.cpp
+	"../include/SwordMan.h"
+>>>>>>> b965619921be1315d63fe0b5cb576cff2a17f389
 
