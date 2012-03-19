@@ -38,6 +38,5 @@ void Animation::Draw(sf::RenderWindow &window)
     sprite.SetSubRect(drawArea);
     sprite.SetPosition(posx, posy);
 
-
     window.Draw(sprite);
 }

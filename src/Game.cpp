@@ -236,7 +236,7 @@ void Game::HandleInput()
         }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
         {
-            animations.push_back(new Animation(100, 100, 0, "images/shipAnimation.png", 10));
+            animations.push_back(new Animation(100, 100, 0, "images/monsterSpawnAnimation.png", 10));
         }
     }
 
@@ -452,9 +452,13 @@ void Game::Render()
     {
         window->Draw(seaSprite);
 
-        if(monster != NULL)
+        if(monster != NULL && monster->IsSpawning() == false)
         {
             monster->Draw(*window);
+        }
+        else if(monster != NULL && monster->IsSpawning() == true)
+        {
+            monster->DrawSpawningAnimation(*window);
         }
 
         ship->Draw(*window);
