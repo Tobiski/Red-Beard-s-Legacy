@@ -16,13 +16,15 @@ class SwordMan : public Drawable
         virtual ~SwordMan();
 
         void Update() {}
-        void Strike(const int direction) {}
-        void Defence(const int direction) {}
+        int GetChoise() { return choise;}
+        void Strike(int dir) { choise = dir;  }
+        void Defence(int dir) { choise = -dir; } // if player defens then int is negative
         void LoseEnergy() {}
-        void Move(const int direction) {}
+        void Move(int direction);
     private:
         sf::Image image;
         sf::Sprite sprite;
+        int choise;
 };
 
 #endif // SWORDMAN_H
