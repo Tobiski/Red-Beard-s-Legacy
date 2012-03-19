@@ -41,6 +41,28 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+<<<<<<< HEAD
+		<Unit filename="include\Animation.h" />
+		<Unit filename="include\Cannonball.h" />
+		<Unit filename="include\Drawable.h" />
+		<Unit filename="include\Enemy.h" />
+		<Unit filename="include\Game.h" />
+		<Unit filename="include\Misc.h" />
+		<Unit filename="include\Monster.h" />
+		<Unit filename="include\Ship.h" />
+		<Unit filename="include\ShipEntity.h" />
+		<Unit filename="include\SwordFight.h" />
+		<Unit filename="src\Animation.cpp" />
+		<Unit filename="src\Cannonball.cpp" />
+		<Unit filename="src\Drawable.cpp" />
+		<Unit filename="src\Enemy.cpp" />
+		<Unit filename="src\Game.cpp" />
+		<Unit filename="src\Monster.cpp" />
+		<Unit filename="src\Ship.cpp" />
+		<Unit filename="src\ShipEntity.cpp" />
+		<Unit filename="src\SwordFight.cpp" />
+		<Unit filename="src\main.cpp" />
+=======
 		<Unit filename="include/Animation.h" />
 		<Unit filename="include/Cannonball.h" />
 		<Unit filename="include/Drawable.h" />
@@ -63,6 +85,7 @@
 		<Unit filename="src/SwordFight.cpp" />
 		<Unit filename="src/SwordMan.cpp" />
 		<Unit filename="src/main.cpp" />
+>>>>>>> b965619921be1315d63fe0b5cb576cff2a17f389
 		<Extensions>
 			<code_completion />
 			<debugger />

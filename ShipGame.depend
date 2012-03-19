@@ -151,7 +151,7 @@
 	<SFML/Graphics.hpp>
 	"../include/Drawable.h"
 
-1332088262 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
+1332188424 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\game.cpp
 	<iostream>
 	<time.h>
 	"../include/Game.h"
@@ -162,7 +162,7 @@
 	"../include/Animation.h"
 	"../include/Monster.h"
 
-1332087836 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\game.h
+1332176395 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\game.h
 	<vector>
 	<SFML/Graphics.hpp>
 
@@ -185,12 +185,14 @@
 	<iostream>
 	"../include/Game.h"
 
-1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\monster.cpp
+1332188411 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\monster.cpp
 	"../include/Monster.h"
 	"../include/Misc.h"
+	"../include/ShipEntity.h"
+	"../include/Animation.h"
 	<iostream>
 
-1332086211 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\monster.h
+1332188432 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\monster.h
 	"Drawable.h"
 
 1332086211 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\cannonball.cpp
@@ -198,7 +200,7 @@
 	"../include/Enemy.h"
 	"../include/Misc.h"
 
-1331986452 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\animation.cpp
+1332188305 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\animation.cpp
 	<iostream>
 	"../include/Animation.h"
 	"../include/Misc.h"
@@ -293,7 +295,22 @@
 	<iostream>
 	"../include/Game.h"
 
+<<<<<<< HEAD
 1332192306 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordFight.cpp
+=======
+1332073129 D
+
+1332178079 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\swordfight.cpp
+	"../include/SwordFight.h"
+
+1332178079 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\swordfight.h
+	<SFML/Graphics.hpp>
+	"../include/SwordMan.h"
+
+1332086211 hics.hpp>
+
+1332092182 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordFight.cpp
+>>>>>>> 7148795a2844d831cd3c668dad63e4d12d8ee560
 	"../include/SwordFight.h"
 
 1332192294 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordFight.h
@@ -304,5 +321,13 @@
 	"../include/Drawable.h"
 
 1332190040 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordMan.cpp
+	"../include/SwordMan.h"
+
+1332086966 5619921be1315d63fe0b5cb576cff2a17f389
+
+1332178079 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\swordman.h
+	"../include/Drawable.h"
+
+1332178079 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\swordman.cpp
 	"../include/SwordMan.h"
 

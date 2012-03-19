@@ -34,6 +34,8 @@ private:
     sf::Sprite gameOverSprite;
     sf::Image menuImage;
     sf::Sprite menuSprite;
+    sf::Image pauseMenuImage;
+    sf::Sprite pauseMenuSprite;
     sf::Image skullImage;
     sf::Sprite skullSprite;
     sf::Image pauseSkullImage;
