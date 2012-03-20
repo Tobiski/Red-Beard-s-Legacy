@@ -33,14 +33,17 @@ void SwordFight::GameLoop()
     {
         LoopKeys();
         Update();
-        draw();
+        Draw();
     }
 }
 
-void SwordFight::draw()
+void SwordFight::Draw()
 {
+    window->Draw(bgSprite);
     player->Draw(*window);
     computer->Draw(*window);
+
+    window->Display();
 }
 
 void SwordFight::Update()
@@ -87,16 +90,16 @@ void SwordFight::Update()
         turnTimer.Reset();
         if(player->GetTurn() == DEFENSE)
         {
-            if(playerChoise != aiChoise)
+            if(playerChoise != -aiChoise)
             {
-                player->LoseEnergy();
+                player->GetHit();
             }
         }
         else // player turn to strike
         {
-            if(playerChoise != aiChoise)
+            if(-playerChoise != aiChoise)
             {
-                computer->LoseEnergy();
+                computer->GetHit();
             }
         }
         SwapTurns();

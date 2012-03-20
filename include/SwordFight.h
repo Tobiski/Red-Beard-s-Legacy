@@ -29,7 +29,7 @@ class SwordFight
         void GameLoop();
         void LoopKeys();
         void Update();
-        void draw();
+        void Draw();
         void Lose();
         void Win();
         void SwapTurns();

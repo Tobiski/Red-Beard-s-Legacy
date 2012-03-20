@@ -18,11 +18,6 @@ void SwordMan::Move(int direction)
         posx++;
 }
 
-void SwordMan::LoseEnergy()
-{
-
-}
-
 void SwordMan::Strike(int dir)
 {
      choise = dir;
