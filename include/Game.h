@@ -18,6 +18,7 @@ class Ship;
 class Enemy;
 class Animation;
 class Monster;
+class TextBox;
 
 class Game
 {
@@ -54,6 +55,8 @@ private:
     std::clock_t monsterTimer;
     double delta;
     Monster *monster;
+
+    TextBox *textBox;
 
 public:
     Game();

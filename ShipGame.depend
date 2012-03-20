@@ -379,7 +379,56 @@
 	<iostream>
 	"../include/Game.h"
 
-1332254582 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/Game.h
+1332255377 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/Game.h
 	<vector>
 	<SFML/Graphics.hpp>
+
+1332254582 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/Animation.cpp
+	<iostream>
+	"../include/Animation.h"
+	"../include/Misc.h"
+
+1332111414 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/Animation.h
+	"../include/Drawable.h"
+
+1332257485 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/Game.cpp
+	<iostream>
+	<time.h>
+	"../include/Game.h"
+	"../include/Misc.h"
+	"../include/Ship.h"
+	"../include/Cannonball.h"
+	"../include/Enemy.h"
+	"../include/Animation.h"
+	"../include/Monster.h"
+	"../include/TextBox.h"
+
+1332254582 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/Monster.h
+	"Drawable.h"
+
+1332254582 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/Monster.cpp
+	"../include/Monster.h"
+	"../include/Misc.h"
+	"../include/ShipEntity.h"
+	"../include/Animation.h"
+	<iostream>
+
+1332254582 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/SwordFight.cpp
+	"../include/SwordFight.h"
+
+1332254582 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/SwordFight.h
+	<SFML/Graphics.hpp>
+	"../include/SwordMan.h"
+
+1332254582 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/SwordMan.h
+	"../include/Drawable.h"
+
+1332254582 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/SwordMan.cpp
+	"../include/SwordMan.h"
+
+1332256526 source:/home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/src/TextBox.cpp
+	"../include/TextBox.h"
+
+1332256560 /home/tobiski/Documents/Ohjelmointi/Games/ShipGame/Red-Beard-s-Legacy/include/TextBox.h
+	"../include/Drawable.h"
 

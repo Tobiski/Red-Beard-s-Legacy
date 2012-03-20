@@ -8,6 +8,7 @@
 #include "../include/Enemy.h"
 #include "../include/Animation.h"
 #include "../include/Monster.h"
+#include "../include/TextBox.h"
 
 Game::Game()
 {
@@ -24,6 +25,7 @@ Game::~Game()
 
 void Game::Init()
 {
+    textBox = NULL;
     monster = NULL;
     monsterTimer = std::clock();
     scoreFont.LoadFromFile("Treamd.ttf");
@@ -211,10 +213,15 @@ void Game::HandleInput()
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
                 if(ship->GetHealth() < 5)
+                {
                     ship->Repair();
+                    textBox = new TextBox(0, 0, "You repaired your ship for 100 golds.");
+                }
+                else if(ship->GetHealth() == 5)
+                    textBox = new TextBox(0, 0, "Your ship already has full health.");
             }
             else if(gameState == MARKET && marketSelect == UPGRADE)
-                std::cout << "Upgrading cannons" << std::endl;
+                    textBox = new TextBox(0, 0, "You upgraded your cannons for 1000 golds.");
             else if(gameState == MARKET && marketSelect == EXIT_MARKET)
             {
                 gameState = HARBOR;
@@ -229,6 +236,7 @@ void Game::HandleInput()
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::M && gameState == PLAYING)
         {
             monster = new Monster();
+            textBox = new TextBox(0, 0, "A horrible monster has risen from the sea!");
         }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::W && gameState == PLAYING)
         {
@@ -261,6 +269,16 @@ void Game::HandleInput()
 
 void Game::Update()
 {
+    /* Check if the message have been displayed for 2 seconds*/
+    if(textBox != NULL)
+    {
+        if(textBox->GetTime() > 2)
+        {
+            delete textBox;
+            textBox = NULL;
+        }
+    }
+
     /* Check if we can create a monster */
     delta = (std::clock() - monsterTimer) / (double)CLOCKS_PER_SEC;
     if(delta > 10 && monster == NULL)
@@ -268,6 +286,7 @@ void Game::Update()
         if(rand()%4 == 0)
         {
             monster = new Monster();
+            textBox = new TextBox(0, 0, "A horrible monster has risen from the sea!");
         }
     }
 
@@ -491,7 +510,6 @@ void Game::Render()
         window->Draw(scoreText);
 
         window->Draw(pirateSprite);
-
     }
 
     else if(gameState == HARBOR)
@@ -623,6 +641,9 @@ void Game::Render()
         infoText.SetPosition(WIN_WIDTH/2 - 100, WIN_HEIGHT/2 + 100);
         window->Draw(infoText);
     }
+
+    if(textBox != NULL && textBox->GetTime() < 2)
+        textBox->Draw(*window);
 
     window->Display();
 }
