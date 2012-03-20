@@ -48,6 +48,8 @@ Ship::Ship(std::string imageDir, float posx, float posy)
     health = 5;
     shipsHit = 0;
     cannonballsShot = 0;
+    cannonLevel = 1;
+    gold = 0;
 }
 
 Ship::~Ship()
@@ -144,6 +146,15 @@ std::string Ship::GetScore()
     return scoreString;
 }
 
+std::string Ship::GetGoldString()
+{
+    std::string goldString = "Gold: ";
+    std::string goldAdd  = ia::itoa(gold, 10);
+    goldString += goldAdd;
+
+    return goldString;
+}
+
 std::string Ship::GetInfo()
 {
     std::string info1 = "You shot ";
@@ -162,4 +173,17 @@ std::string Ship::GetInfo()
     info1 += " %";
 
     return info1;
+}
+
+bool Ship::RemoveGold(int amount)
+{
+    if(gold >= amount)
+    {
+        gold -= amount;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

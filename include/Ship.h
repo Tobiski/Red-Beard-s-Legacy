@@ -12,6 +12,8 @@ class Ship : public ShipEntity
 private:
     int cooldown;
     int score;
+    int gold;
+    int cannonLevel;
     int shipsHit;
     int cannonballsShot;
     float accuracy;
@@ -23,6 +25,8 @@ public:
     void Accel(int dir);
     void Turn(int dir);
     void Fire(std::vector<Cannonball*> &cannonballs);
+    bool RemoveGold(int amount);
+    int GetGold() { return gold; }
     void AddScore()
     {
         score += 10;
@@ -35,8 +39,13 @@ public:
     {
         health++;
     }
+    void AddGold(int amount)
+    {
+        gold += amount;
+    }
     std::string GetInfo();
     std::string GetScore();
+    std::string GetGoldString();
 };
 
 #endif

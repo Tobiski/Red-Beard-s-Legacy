@@ -69,7 +69,7 @@ void Game::Init()
     window = new sf::RenderWindow(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, WIN_BPP), "Red Beard's Legacy");
     window->SetFramerateLimit(MAXFPS);
 
-    ship = new Ship("images/ship.png", 100, 100);
+    ship = new Ship("images/playerShip.png", 100, 100);
 
     GameLoop();
 }
@@ -212,16 +212,25 @@ void Game::HandleInput()
             }
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
-                if(ship->GetHealth() < 5)
+                if(ship->GetHealth() < 5 && ship->GetGold() >= 100)
                 {
                     ship->Repair();
-                    textBox = new TextBox(0, 0, "You repaired your ship for 100 golds.");
+                    ship->RemoveGold(100);
+                    textBox = new TextBox(0, 0, "You repaired the ship for 100 golds.");
                 }
+                else if(ship->GetGold() < 100)
+                    textBox = new TextBox(0, 0, "You don't have enough gold to repair the ship.");
                 else if(ship->GetHealth() == 5)
-                    textBox = new TextBox(0, 0, "Your ship already has full health.");
+                    textBox = new TextBox(0, 0, "The ship is already fully repaired.");
             }
             else if(gameState == MARKET && marketSelect == UPGRADE)
-                    textBox = new TextBox(0, 0, "You upgraded your cannons for 1000 golds.");
+                if(ship->GetGold() >= 1000)
+                {
+                    ship->RemoveGold(1000);
+                    textBox = new TextBox(0, 0, "You upgraded the cannons for 1000 golds.");
+                }
+                else
+                    textBox = new TextBox(0, 0, "You don't have enough gold\nto upgrade the cannons.");
             else if(gameState == MARKET && marketSelect == EXIT_MARKET)
             {
                 gameState = HARBOR;
@@ -441,6 +450,7 @@ void Game::Update()
                             cannonballs.erase(cannonballs.begin()+i);
                             ship->AddHit();
                             ship->AddScore();
+                            ship->AddGold(10);
                             break;
                         }
                     }
@@ -504,10 +514,10 @@ void Game::Render()
         window->Draw(healthBar);
         window->Draw(borders);
 
-        sf::String scoreText(ship->GetScore(), scoreFont, 24);
-        scoreText.SetColor(sf::Color(0, 0, 0, 255));
-        scoreText.SetPosition(WIN_WIDTH - 120, 40);
-        window->Draw(scoreText);
+        sf::String goldText(ship->GetGoldString(), scoreFont, 24);
+        goldText.SetColor(sf::Color(255, 255, 0, 255));
+        goldText.SetPosition(WIN_WIDTH - 120, 40);
+        window->Draw(goldText);
 
         window->Draw(pirateSprite);
     }
