@@ -52,7 +52,7 @@
 	"Enemy.h"
 	"Misc.h"
 
-1332077956 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Cannonball.cpp
+1332273949 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Cannonball.cpp
 	"../include/Cannonball.h"
 	"../include/Enemy.h"
 	"../include/Misc.h"
@@ -74,7 +74,7 @@
 	"../include/Drawable.h"
 	"../include/Misc.h"
 
-1332077956 /media/WorkPlace/Red-Beard-s-Legacy/include/Drawable.h
+1332273948 /media/WorkPlace/Red-Beard-s-Legacy/include/Drawable.h
 	<SFML/Graphics.hpp>
 
 1332069167 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Enemy.cpp
@@ -83,7 +83,7 @@
 	"../include/Cannonball.h"
 	"../include/Misc.h"
 
-1332094445 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Game.cpp
+1332272161 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Game.cpp
 	<iostream>
 	<time.h>
 	"../include/Game.h"
@@ -93,23 +93,26 @@
 	"../include/Enemy.h"
 	"../include/Animation.h"
 	"../include/Monster.h"
+	"../include/TextBox.h"
 
-1332094445 /media/WorkPlace/Red-Beard-s-Legacy/include/Game.h
+1332271778 /media/WorkPlace/Red-Beard-s-Legacy/include/Game.h
 	<vector>
 	<SFML/Graphics.hpp>
 
-1332094445 /media/WorkPlace/Red-Beard-s-Legacy/include/Ship.h
+1332272161 /media/WorkPlace/Red-Beard-s-Legacy/include/Ship.h
 	"ShipEntity.h"
 
-1332082643 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Monster.cpp
+1332192519 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Monster.cpp
 	"../include/Monster.h"
 	"../include/Misc.h"
+	"../include/ShipEntity.h"
+	"../include/Animation.h"
 	<iostream>
 
-1332081815 /media/WorkPlace/Red-Beard-s-Legacy/include/Monster.h
+1332192519 /media/WorkPlace/Red-Beard-s-Legacy/include/Monster.h
 	"Drawable.h"
 
-1332069167 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Ship.cpp
+1332272161 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Ship.cpp
 	<iostream>
 	"../include/Misc.h"
 	"../include/Ship.h"
@@ -209,7 +212,7 @@
 1331984985 c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\include\animation.h
 	"../include/Drawable.h"
 
-1332069167 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Animation.cpp
+1332273949 source:/media/WorkPlace/Red-Beard-s-Legacy/src/Animation.cpp
 	<iostream>
 	"../include/Animation.h"
 	"../include/Misc.h"
@@ -316,10 +319,10 @@
 	<SFML/Graphics.hpp>
 	"../include/SwordMan.h"
 
-1332192174 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordMan.h
+1332275872 /media/WorkPlace/Red-Beard-s-Legacy/include/SwordMan.h
 	"../include/Drawable.h"
 
-1332190040 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordMan.cpp
+1332275109 source:/media/WorkPlace/Red-Beard-s-Legacy/src/SwordMan.cpp
 	"../include/SwordMan.h"
 
 1332086966 5619921be1315d63fe0b5cb576cff2a17f389
@@ -437,5 +440,11 @@
 	"../include/Drawable.h"
 
 1332258409 source:c:\users\tobijas\documents\ohjelmointi\games\shipgame\shipgame\src\textbox.cpp
+	"../include/TextBox.h"
+
+1332271778 /media/WorkPlace/Red-Beard-s-Legacy/include/TextBox.h
+	"../include/Drawable.h"
+
+1332271778 source:/media/WorkPlace/Red-Beard-s-Legacy/src/TextBox.cpp
 	"../include/TextBox.h"
 

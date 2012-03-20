@@ -32,6 +32,7 @@ class SwordFight
         void draw();
         void Lose();
         void Win();
+        void SwapTurns();
 
         sf::RenderWindow* window;
         sf::Event event;
@@ -40,6 +41,7 @@ class SwordFight
 
         sf::Image bgImage;
         sf::Sprite bgSprite;
+        sf::Clock turnTimer;
 
         SwordMan* player;
         SwordMan* computer;

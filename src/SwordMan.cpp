@@ -18,4 +18,24 @@ void SwordMan::Move(int direction)
         posx++;
 }
 
+void SwordMan::LoseEnergy()
+{
+
+}
+
+void SwordMan::Strike(int dir)
+{
+     choise = dir;
+}
+
+void SwordMan::Defence(int dir)
+{
+     choise = -dir;
+}
+
+void SwordMan::Turn(bool turn)
+{
+    strikeTurn = turn;
+}
+
 

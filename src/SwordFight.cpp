@@ -11,6 +11,8 @@ SwordFight::SwordFight(sf::RenderWindow* ewindow) :
     computer = new SwordMan();
 
     deltaX = 0;
+
+    turnTimer.Reset();
 }
 
 SwordFight::~SwordFight()
@@ -43,7 +45,6 @@ void SwordFight::draw()
 
 void SwordFight::Update()
 {
-    int THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW = rand()%7;
     /* GameState checks */
     if(escape)
     {
@@ -52,8 +53,7 @@ void SwordFight::Update()
     }
     if(enter && gameState == PAUSE) Lose();
 
-    /* Fight check */
-    deltaX = computer->GetXpos() - player->GetXpos() ;
+
     /* Take player choise */
     if((right && !space) && deltaX > 30) player->Move(RIGHT);
     else if(left && !space) player->Move(LEFT);
@@ -63,20 +63,66 @@ void SwordFight::Update()
     else if(up && space) player->Strike(UP);
     else if(down && space) player->Strike(DOWN);
     else; // Do nothing
+    playerChoise = player->GetChoise();
+
     /* Take computer choise */
-    if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 0) computer->Move(RIGHT);
-    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 1 && deltaX > 30) computer->Move(LEFT);
-    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 2) computer->Defence(UP);
-    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 3) computer->Defence(DOWN);
-    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 4) computer->Strike(MIDDLE);
-    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 5) computer->Strike(UP);
+    aiChoise = rand()%7;
+    if(aiChoise == 0) computer->Move(RIGHT);
+    else if(aiChoise == 1 && deltaX > 30) computer->Move(LEFT);
+    else if(aiChoise == 2) computer->Defence(UP);
+    else if(aiChoise == 3) computer->Defence(DOWN);
+    else if(aiChoise == 4) computer->Strike(MIDDLE);
+    else if(aiChoise == 5) computer->Strike(UP);
     else computer->Strike(DOWN);
 
-    /* If player and computer are in hitting range */
-    if(deltaX < 20)
+    /* Calculate if player and computer are in hitting range after movement */
+    deltaX = computer->GetXpos() - (player->GetXpos() + player->GetWidth());
+
+    /*
+     * TurnTimer prevents that players can't strike too thick
+     * and swap strike turn
+     */
+    if(deltaX < 20 && turnTimer.GetElapsedTime() > 30.0f)
     {
-        playerChoise = player->GetChoise();
-        aiChoise = computer->GetChoise();
+        turnTimer.Reset();
+        if(player->GetTurn() == DEFENSE)
+        {
+            if(playerChoise != aiChoise)
+            {
+                player->LoseEnergy();
+            }
+        }
+        else // player turn to strike
+        {
+            if(playerChoise != aiChoise)
+            {
+                computer->LoseEnergy();
+            }
+        }
+        SwapTurns();
+    }
+    /*
+     * Reset timer if neither players doesn't strike
+     * in time and swap strike turn
+     */
+    if(turnTimer.GetElapsedTime() > 30.0f)
+    {
+        turnTimer.Reset();
+        SwapTurns();
+    }
+}
+
+void SwordFight::SwapTurns()
+{
+    if(player->GetTurn() == DEFENSE)
+    {
+        player->Turn(STRIKE);
+        computer->Turn(DEFENSE);
+    }
+    else
+    {
+        player->Turn(DEFENSE);
+        computer->Turn(STRIKE);
     }
 }
 

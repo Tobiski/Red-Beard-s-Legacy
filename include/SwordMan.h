@@ -1,6 +1,9 @@
 #ifndef SWORDMAN_H
 #define SWORDMAN_H
 
+#define DEFENSE 0
+#define STRIKE 1
+
 #define LEFT 0
 #define RIGHT 1
 #define UP 2
@@ -16,15 +19,21 @@ class SwordMan : public Drawable
         virtual ~SwordMan();
 
         void Update() {}
-        int GetChoise() { return choise;}
-        void Strike(int dir) { choise = dir;  }
-        void Defence(int dir) { choise = -dir; } // if player defens then int is negative
-        void LoseEnergy() {}
+        void Strike(int dir);
+        void Defence(int dir); // if player defens then choise is negative
+        void LoseEnergy();
         void Move(int direction);
+
+        void Turn(bool turn);
+
+        bool GetTurn() { return strikeTurn; }
+        int GetChoise() { return choise;}
+
     private:
         sf::Image image;
         sf::Sprite sprite;
         int choise;
+        bool strikeTurn; // 0 defence 1 strike
 };
 
 #endif // SWORDMAN_H
