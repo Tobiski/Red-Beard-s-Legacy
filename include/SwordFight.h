@@ -29,6 +29,7 @@ class SwordFight
         void GameLoop();
         void LoopKeys();
         void Update();
+        void draw();
         void Lose();
         void Win();
 
@@ -42,6 +43,10 @@ class SwordFight
 
         SwordMan* player;
         SwordMan* computer;
+
+        float deltaX;
+        int playerChoise;
+        int aiChoise;
 
         bool winner;
         bool running;

@@ -9,6 +9,8 @@ SwordFight::SwordFight(sf::RenderWindow* ewindow) :
 
     player = new SwordMan();
     computer = new SwordMan();
+
+    deltaX = 0;
 }
 
 SwordFight::~SwordFight()
@@ -29,26 +31,53 @@ void SwordFight::GameLoop()
     {
         LoopKeys();
         Update();
+        draw();
     }
+}
+
+void SwordFight::draw()
+{
+    player->Draw(*window);
+    computer->Draw(*window);
 }
 
 void SwordFight::Update()
 {
-    if(right && !space) player->Move(RIGHT);
-    if(left && !space) player->Move(LEFT);
-    if(up && !space) player->Defence(UP);
-    if(down && !space) player->Defence(DOWN);
-    if(right && space) player->Strike(UP);
-    if(up && space) player->Strike(MIDDLE);
-    if(down && space) player->Strike(DOWN);
-
+    int THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW = rand()%7;
+    /* GameState checks */
     if(escape)
     {
         if(gameState == PLAY) gameState = PAUSE;
         else gameState = PLAY;
     }
-
     if(enter && gameState == PAUSE) Lose();
+
+    /* Fight check */
+    deltaX = computer->GetXpos() - player->GetXpos() ;
+    /* Take player choise */
+    if((right && !space) && deltaX > 30) player->Move(RIGHT);
+    else if(left && !space) player->Move(LEFT);
+    else if(up && !space) player->Defence(UP);
+    else if(down && !space) player->Defence(DOWN);
+    else if(right && space) player->Strike(MIDDLE);
+    else if(up && space) player->Strike(UP);
+    else if(down && space) player->Strike(DOWN);
+    else; // Do nothing
+    /* Take computer choise */
+    if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 0) computer->Move(RIGHT);
+    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 1 && deltaX > 30) computer->Move(LEFT);
+    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 2) computer->Defence(UP);
+    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 3) computer->Defence(DOWN);
+    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 4) computer->Strike(MIDDLE);
+    else if(THIS_IS_CURRENT_AI_CHOISE_RIGHT_NOW == 5) computer->Strike(UP);
+    else computer->Strike(DOWN);
+
+    /* If player and computer are in hitting range */
+    if(deltaX < 20)
+    {
+        playerChoise = player->GetChoise();
+        aiChoise = computer->GetChoise();
+    }
 }
 
 void SwordFight::Lose()

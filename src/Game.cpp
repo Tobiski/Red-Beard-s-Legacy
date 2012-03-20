@@ -32,6 +32,10 @@ void Game::Init()
     menuSprite.SetImage(menuImage);
     menuSprite.SetPosition(0,0);
 
+    pauseMenuImage.LoadFromFile("images/pauseMenu.png");
+    pauseMenuSprite.SetImage(pauseMenuImage);
+    pauseMenuSprite.SetPosition(WIN_WIDTH / 2 - (pauseMenuSprite.GetSize().x / 2), WIN_HEIGHT / 2 - (pauseMenuSprite.GetSize().y / 2));
+
     seaImage.LoadFromFile("images/sea.png");
     seaSprite.SetImage(seaImage);
     seaSprite.SetPosition(0,0);
@@ -200,16 +204,22 @@ void Game::HandleInput()
             else if(gameState == HARBOR && harborSelect == ENTER_MARKET)
                 gameState = MARKET;
             else if(gameState == HARBOR && harborSelect == EXIT_HARBOR)
+            {
                 gameState = PLAYING;
+                harborSelect = ENTER_MARKET;
+            }
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
-                std::cout << "Repairing ship" << std::endl;
-                ship->Repair();
+                if(ship->GetHealth() < 5)
+                    ship->Repair();
             }
             else if(gameState == MARKET && marketSelect == UPGRADE)
                 std::cout << "Upgrading cannons" << std::endl;
             else if(gameState == MARKET && marketSelect == EXIT_MARKET)
+            {
                 gameState = HARBOR;
+                marketSelect = REPAIR;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::S && gameState == PLAYING)
@@ -226,7 +236,7 @@ void Game::HandleInput()
         }
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::A && gameState == PLAYING)
         {
-            animations.push_back(new Animation(100, 100, 0, "images/shipAnimation.png", 10));
+            animations.push_back(new Animation(100, 100, 0, "images/monsterSpawnAnimation.png", 10));
         }
     }
 
@@ -330,6 +340,19 @@ void Game::Update()
         }
     }
 
+    /* Check monster collision against player's ship */
+    if(monster != NULL)
+    {
+        if(monster->CheckCollision(*ship))
+        {
+            ship->GetHit();
+            ship->GetHit();
+            delete monster;
+            monster = NULL;
+            monsterTimer = std::clock();
+        }
+    }
+
     /* Check cannonball live against ships */
     for(int i = 0; i < cannonballs.size(); i++)
     {
@@ -344,7 +367,7 @@ void Game::Update()
         {
             cannonballs[i]->Update();
 
-            /* Check collision against monster */
+            /* Check cannonball collision against monster */
             if(monster != NULL)
             {
                 if(cannonballs[i]->CheckCollision(*monster))
@@ -429,9 +452,13 @@ void Game::Render()
     {
         window->Draw(seaSprite);
 
-        if(monster != NULL)
+        if(monster != NULL && monster->IsSpawning() == false)
         {
             monster->Draw(*window);
+        }
+        else if(monster != NULL && monster->IsSpawning() == true)
+        {
+            monster->DrawSpawningAnimation(*window);
         }
 
         ship->Draw(*window);
@@ -470,33 +497,35 @@ void Game::Render()
     else if(gameState == HARBOR)
     {
         window->Clear();
+        window->Draw(seaSprite);
+        window->Draw(pauseMenuSprite);
 
-        sf::String pausedText("HARBOR", scoreFont, 42);
-        pausedText.SetColor(sf::Color(255, 255, 255, 200));
-        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
-        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+        sf::String harborText("HARBOR", scoreFont, 42);
+        harborText.SetColor(sf::Color(0, 0, 0, 200));
+        harborText.SetCenter(harborText.GetSize(), harborText.GetSize());
+        harborText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 100);
 
-        sf::String resumeText("Market", scoreFont, 36);
-        resumeText.SetColor(sf::Color(255, 255, 255, 200));
-        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
-        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+        sf::String marketText("Market", scoreFont, 36);
+        marketText.SetColor(sf::Color(0, 0, 0, 200));
+        marketText.SetCenter(marketText.GetSize(), marketText.GetSize());
+        marketText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 150);
 
-        sf::String mainmenuText("Leave harbor", scoreFont, 36);
-        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
-        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
-        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+        sf::String leaveHarborText("Leave harbor", scoreFont, 36);
+        leaveHarborText.SetColor(sf::Color(0, 0, 0, 200));
+        leaveHarborText.SetCenter(leaveHarborText.GetSize(), leaveHarborText.GetSize());
+        leaveHarborText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 200);
 
-        window->Draw(pausedText);
-        window->Draw(resumeText);
-        window->Draw(mainmenuText);
+        window->Draw(harborText);
+        window->Draw(marketText);
+        window->Draw(leaveHarborText);
 
         if(harborSelect == ENTER_MARKET)
         {
-            pauseSkullSprite.SetPosition(420, 400);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 120);
         }
         else if(harborSelect == EXIT_HARBOR)
         {
-            pauseSkullSprite.SetPosition(420, 450);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 170);
         }
         window->Draw(pauseSkullSprite);
     }
@@ -504,43 +533,45 @@ void Game::Render()
     else if(gameState == MARKET)
     {
         window->Clear();
+        window->Draw(seaSprite);
+        window->Draw(pauseMenuSprite);
 
-        sf::String pausedText("MARKET", scoreFont, 42);
-        pausedText.SetColor(sf::Color(255, 255, 255, 200));
-        pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
-        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+        sf::String marketText("MARKET", scoreFont, 42);
+        marketText.SetColor(sf::Color(0, 0, 0, 200));
+        marketText.SetCenter(marketText.GetSize(), marketText.GetSize());
+        marketText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 100);
 
-        sf::String resumeText("Repair ship", scoreFont, 36);
-        resumeText.SetColor(sf::Color(255, 255, 255, 200));
-        resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
-        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+        sf::String repairText("Repair ship", scoreFont, 36);
+        repairText.SetColor(sf::Color(0, 0, 0, 200));
+        repairText.SetCenter(repairText.GetSize(), repairText.GetSize());
+        repairText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 150);
 
-        sf::String mainmenuText("Upgrade cannons", scoreFont, 36);
-        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
-        mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
-        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+        sf::String upgradeText("Upgrade cannons", scoreFont, 36);
+        upgradeText.SetColor(sf::Color(0, 0, 0, 200));
+        upgradeText.SetCenter(upgradeText.GetSize(), upgradeText.GetSize());
+        upgradeText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 200);
 
         sf::String leaveMarketText("Leave market", scoreFont, 36);
-        leaveMarketText.SetColor(sf::Color(255, 255, 255, 200));
+        leaveMarketText.SetColor(sf::Color(0, 0, 0, 200));
         leaveMarketText.SetCenter(leaveMarketText.GetSize(), leaveMarketText.GetSize());
-        leaveMarketText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 150);
+        leaveMarketText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 250);
 
-        window->Draw(pausedText);
-        window->Draw(resumeText);
-        window->Draw(mainmenuText);
+        window->Draw(marketText);
+        window->Draw(repairText);
+        window->Draw(upgradeText);
         window->Draw(leaveMarketText);
 
         if(marketSelect == REPAIR)
         {
-            pauseSkullSprite.SetPosition(420, 400);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 120);
         }
         else if(marketSelect == UPGRADE)
         {
-            pauseSkullSprite.SetPosition(420, 450);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 170);
         }
         else if(marketSelect == EXIT_MARKET)
         {
-            pauseSkullSprite.SetPosition(420, 500);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 220);
         }
         window->Draw(pauseSkullSprite);
     }
@@ -549,20 +580,24 @@ void Game::Render()
     {
         window->Clear();
 
+        window->Draw(seaSprite);
+
+        window->Draw(pauseMenuSprite);
+
         sf::String pausedText("PAUSED", scoreFont, 42);
-        pausedText.SetColor(sf::Color(255, 255, 255, 200));
+        pausedText.SetColor(sf::Color(0, 0, 0, 200));
         pausedText.SetCenter(pausedText.GetSize(), pausedText.GetSize());
-        pausedText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2);
+        pausedText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 100);
 
         sf::String resumeText("Resume", scoreFont, 36);
-        resumeText.SetColor(sf::Color(255, 255, 255, 200));
+        resumeText.SetColor(sf::Color(0, 0, 0, 200));
         resumeText.SetCenter(resumeText.GetSize(), resumeText.GetSize());
-        resumeText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 50);
+        resumeText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 150);
 
         sf::String mainmenuText("Main Menu", scoreFont, 36);
-        mainmenuText.SetColor(sf::Color(255, 255, 255, 200));
+        mainmenuText.SetColor(sf::Color(0, 0, 0, 200));
         mainmenuText.SetCenter(mainmenuText.GetSize(), mainmenuText.GetSize());
-        mainmenuText.SetPosition(WIN_WIDTH/2, WIN_HEIGHT/2 + 100);
+        mainmenuText.SetPosition(pauseMenuSprite.GetPosition().x + 150 , pauseMenuSprite.GetPosition().y + 200);
 
         window->Draw(pausedText);
         window->Draw(resumeText);
@@ -570,11 +605,11 @@ void Game::Render()
 
         if(pauseSelect == RESUME)
         {
-            pauseSkullSprite.SetPosition(420, 400);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 120);
         }
         else if(pauseSelect == MENU)
         {
-            pauseSkullSprite.SetPosition(420, 450);
+            pauseSkullSprite.SetPosition(pauseMenuSprite.GetPosition().x + 50 , pauseMenuSprite.GetPosition().y + 170);
         }
         window->Draw(pauseSkullSprite);
     }
