@@ -197,7 +197,6 @@ void Game::HandleInput()
                 cannonballs.clear();
                 enemies.clear();
                 ship = new Ship("images/ship.png", 100, 100);
-                introMusic.Play();
             }
             else if(gameState == GAMEOVER)
             {
