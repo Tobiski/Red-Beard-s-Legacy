@@ -13,15 +13,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "../include/SwordMan.h"
-#define COMPUTER 0
-#define PLAYER 1
+#include "../include/Misc.h"
 
 enum GameState { PAUSE, PLAY };
 
 class SwordFight
 {
     public:
-        SwordFight(sf::RenderWindow* window);
+        SwordFight(sf::RenderWindow *window);
         virtual ~SwordFight();
         bool Fight(); // returns sword winner
 
@@ -33,6 +32,7 @@ class SwordFight
         void Lose();
         void Win();
         void SwapTurns();
+        void SwapState();
 
         sf::RenderWindow* window;
         sf::Event event;

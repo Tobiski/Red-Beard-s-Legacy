@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/Drawable.h"
 #include "../include/Misc.h"
 
@@ -32,4 +33,10 @@ int Drawable::GetArea()
     {
         return 3;
     }
+}
+
+void Drawable::SetDrawArea(int maxFrames, int frame)
+{
+    sf::IntRect drawArea(frame*160, 0, frame*160+160, sprite.GetSize().y);
+    sprite.SetSubRect(drawArea);
 }

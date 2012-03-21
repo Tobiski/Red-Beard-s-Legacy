@@ -14,6 +14,7 @@ class Drawable
         void Draw(sf::RenderWindow &window);
         int GetArea();
         void GetHit() { health--; }
+        void SetDrawArea(int maxFrames, int frame);
 
         /* Getters */
         int GetHealth() { return health; }
@@ -23,6 +24,7 @@ class Drawable
         float GetRotation() { return angle; }
         float GetWidth(){ return sprite.GetSize().x; }
         float GetHeight(){ return sprite.GetSize().y; }
+        sf::Sprite GetSprite() { return sprite; }
 
         /* Settlers */
         void SetHealth(int h) { health = h; }

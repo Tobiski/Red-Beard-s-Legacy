@@ -9,6 +9,7 @@
 #include "../include/Animation.h"
 #include "../include/Monster.h"
 #include "../include/TextBox.h"
+#include "../include/SwordFight.h"
 
 Game::Game()
 {
@@ -70,6 +71,9 @@ void Game::Init()
     window->SetFramerateLimit(MAXFPS);
 
     ship = new Ship("images/playerShip.png", 100, 100);
+
+    SwordFight swordFight(window);
+    swordFight.Fight();
 
     GameLoop();
 }

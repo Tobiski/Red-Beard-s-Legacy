@@ -4,18 +4,18 @@
 #define DEFENSE 0
 #define STRIKE 1
 
-#define LEFT 0
-#define RIGHT 1
 #define UP 2
 #define DOWN 3
 #define MIDDLE 4
+#define DO_NOTHING 666
 
 #include "../include/Drawable.h"
+#include "../include/Misc.h"
 
 class SwordMan : public Drawable
 {
     public:
-        SwordMan();
+        SwordMan(int id);
         virtual ~SwordMan();
 
         void Update() {}
@@ -23,6 +23,7 @@ class SwordMan : public Drawable
         void Defence(int dir); // if player defens then choise is negative
         void LoseEnergy();
         void Move(int direction);
+        void DoNothing();
 
         void Turn(bool turn);
 
@@ -30,8 +31,7 @@ class SwordMan : public Drawable
         int GetChoise() { return choise;}
 
     private:
-        sf::Image image;
-        sf::Sprite sprite;
+        int id;
         int choise;
         bool strikeTurn; // 0 defence 1 strike
 };
