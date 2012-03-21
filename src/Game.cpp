@@ -197,6 +197,7 @@ void Game::HandleInput()
                 cannonballs.clear();
                 enemies.clear();
                 ship = new Ship("images/ship.png", 100, 100);
+                introMusic.Play();
             }
             else if(gameState == GAMEOVER)
             {
@@ -319,7 +320,7 @@ void Game::Update()
 
     ship->Update();
 
-    if(ship->GetHealth() == 0)
+    if(ship->GetHealth() <= 0)
     {
         GameOver();
     }
