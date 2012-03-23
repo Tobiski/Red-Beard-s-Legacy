@@ -187,16 +187,3 @@ bool Ship::RemoveGold(int amount)
         return false;
     }
 }
-
-bool Ship::UpgradeCannons()
-{
-    if(cannonLevel < MAX_CANNON_LEVEL)
-    {
-        cannonLevel++;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
