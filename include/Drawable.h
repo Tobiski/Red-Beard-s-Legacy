@@ -13,7 +13,7 @@ class Drawable
 
         void Draw(sf::RenderWindow &window);
         int GetArea();
-        void GetHit() { health--; }
+        void GetHit(int amount) { health -= amount; }
         void SetDrawArea(int maxFrames, int frame);
 
         /* Getters */

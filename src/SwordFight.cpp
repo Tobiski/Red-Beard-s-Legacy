@@ -107,7 +107,7 @@ void SwordFight::Update()
             {
                 if(aiChoise != DO_NOTHING)
                 {
-                    player->GetHit();
+                    player->GetHit(1);
                 }
             }
         }
@@ -117,7 +117,7 @@ void SwordFight::Update()
             {
                 if(playerChoise != DO_NOTHING)
                 {
-                    computer->GetHit();
+                    computer->GetHit(1);
                 }
             }
         }

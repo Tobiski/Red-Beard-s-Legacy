@@ -49,7 +49,7 @@ Ship::Ship(std::string imageDir, float posx, float posy)
     shipsHit = 0;
     cannonballsShot = 0;
     cannonLevel = 1;
-    gold = 0;
+    gold = 1000;
 }
 
 Ship::~Ship()
@@ -180,6 +180,19 @@ bool Ship::RemoveGold(int amount)
     if(gold >= amount)
     {
         gold -= amount;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Ship::UpgradeCannons()
+{
+    if(cannonLevel < MAX_CANNON_LEVEL)
+    {
+        cannonLevel++;
         return true;
     }
     else

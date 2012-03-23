@@ -26,7 +26,9 @@ public:
     void Turn(int dir);
     void Fire(std::vector<Cannonball*> &cannonballs);
     bool RemoveGold(int amount);
+    bool UpgradeCannons();
     int GetGold() { return gold; }
+    int GetCannonLevel() { return cannonLevel; }
     void AddScore()
     {
         score += 10;

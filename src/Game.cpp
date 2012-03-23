@@ -72,9 +72,6 @@ void Game::Init()
 
     ship = new Ship("images/playerShip.png", 100, 100);
 
-    SwordFight swordFight(window);
-    swordFight.Fight();
-
     GameLoop();
 }
 
@@ -230,8 +227,17 @@ void Game::HandleInput()
             else if(gameState == MARKET && marketSelect == UPGRADE)
                 if(ship->GetGold() >= 1000)
                 {
-                    ship->RemoveGold(1000);
-                    textBox = new TextBox(0, 0, "You upgraded the cannons for 1000 golds.");
+                    if(ship->GetCannonLevel() < MAX_CANNON_LEVEL)
+                    {
+                        ship->UpgradeCannons();
+                        ship->RemoveGold(1000);
+                        textBox = new TextBox(0, 0, "You upgraded the cannons for 1000 golds.");
+                    }
+                    else
+                    {
+                        ship->UpgradeCannons();
+                        textBox = new TextBox(0, 0, "Your cannons are already fully upgraded.");
+                    }
                 }
                 else
                     textBox = new TextBox(0, 0, "You don't have enough gold\nto upgrade the cannons.");
@@ -377,8 +383,7 @@ void Game::Update()
     {
         if(monster->CheckCollision(*ship))
         {
-            ship->GetHit();
-            ship->GetHit();
+            ship->GetHit(2);
             delete monster;
             monster = NULL;
             monsterTimer = std::clock();
@@ -406,8 +411,8 @@ void Game::Update()
                 {
                     ship->AddScore();
                     cannonballs.erase(cannonballs.begin()+i);
-                    monster->GetHit();
-                    if(monster->GetHealth() == 0)
+                    monster->GetHit(ship->GetCannonLevel());
+                    if(monster->GetHealth() <= 0)
                     {
                         delete monster;
                         monster = NULL;
@@ -428,7 +433,7 @@ void Game::Update()
                 {
                     if(cannonballs[i]->CheckCollision(*ship))
                     {
-                        ship->GetHit();
+                        ship->GetHit(1);
                         cannonballs.erase(cannonballs.begin()+i);
                         break;
                     }
@@ -439,9 +444,9 @@ void Game::Update()
                     /* If cannonball belongs to player, check collision against enemy ships */
                     if(cannonballs[i]->GetId() != ENEMY)
                     {
-                        if(enemies[j]->GetHealth() > 1)
+                        if(enemies[j]->GetHealth() > ship->GetCannonLevel())
                         {
-                            enemies[j]->GetHit();
+                            enemies[j]->GetHit(ship->GetCannonLevel());
                             cannonballs.erase(cannonballs.begin()+i);
                             ship->AddHit();
                             ship->AddScore();
