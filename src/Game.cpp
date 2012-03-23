@@ -10,6 +10,7 @@
 #include "../include/Monster.h"
 #include "../include/TextBox.h"
 #include "../include/SwordFight.h"
+#include "../include/Collision.h"
 
 Game::Game()
 {
@@ -369,7 +370,8 @@ void Game::Update()
             }
             if(i != j)// check that ships don't collide with themselfs
             {
-                if(enemies[i]->CheckCollision(*enemies[j]))
+                if(Collision::PixelPerfectTest(enemies[i]->GetSprite(), enemies[j]->GetSprite()))
+                //if(enemies[i]->CheckCollision(*enemies[j]))
                 {
                     enemies[i]->ForceTurn(LEFT);
                     enemies[j]->ForceTurn(RIGHT);
@@ -381,7 +383,7 @@ void Game::Update()
     /* Check monster collision against player's ship */
     if(monster != NULL)
     {
-        if(monster->CheckCollision(*ship))
+        if(Collision::PixelPerfectTest(ship->GetSprite(), monster->GetSprite()))
         {
             ship->GetHit(2);
             delete monster;
@@ -431,7 +433,7 @@ void Game::Update()
 
                 if(cannonballs[i]->GetId() == ENEMY)
                 {
-                    if(cannonballs[i]->CheckCollision(*ship))
+                    if(Collision::PixelPerfectTest(ship->GetSprite(), cannonballs[i]->GetSprite()))
                     {
                         ship->GetHit(1);
                         cannonballs.erase(cannonballs.begin()+i);
@@ -439,7 +441,7 @@ void Game::Update()
                     }
                 }
 
-                if(cannonballs[i]->CheckCollision(*enemies[j]))
+                if(Collision::PixelPerfectTest(cannonballs[i]->GetSprite(), enemies[j]->GetSprite()))
                 {
                     /* If cannonball belongs to player, check collision against enemy ships */
                     if(cannonballs[i]->GetId() != ENEMY)
