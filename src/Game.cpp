@@ -61,6 +61,11 @@ void Game::Init()
     pirateSprite.SetImage(pirateImage);
     pirateSprite.SetPosition(WIN_WIDTH - 160, 10);
 
+    harborImage.LoadFromFile("images/harbor.png");
+    harborImage.SetSmooth(false);
+    harborSprite.SetImage(harborImage);
+    harborSprite.SetPosition(100, 0);
+
     gameState = MAINMENU;
     menuSelect = START;
     harborSelect = ENTER_MARKET;
@@ -71,7 +76,7 @@ void Game::Init()
     window = new sf::RenderWindow(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, WIN_BPP), "Red Beard's Legacy");
     window->SetFramerateLimit(MAXFPS);
 
-    ship = new Ship("images/playerShip.png", 100, 100);
+    ship = new Ship("images/playerShip.png", 150, 100);
 
     GameLoop();
 }
@@ -211,6 +216,9 @@ void Game::HandleInput()
             {
                 gameState = PLAYING;
                 harborSelect = ENTER_MARKET;
+                ship->SetRotation(90);
+                ship->SetposX(150);
+                ship->SetposY(100);
             }
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
@@ -360,6 +368,12 @@ void Game::Update()
     }
 
     /* Start checking collision */
+
+    /* Check if the player enters the barbor */
+    if(Collision::PixelPerfectTest(ship->GetSprite(), harborSprite))
+        gameState = HARBOR;
+
+    /* Check if enemies collide against each other */
     for(int i = 0; i < enemies.size(); i++)
     {
         for(int j = 0; j < enemies.size(); j++)
@@ -491,6 +505,8 @@ void Game::Render()
     else if(gameState == PLAYING)
     {
         window->Draw(seaSprite);
+
+        window->Draw(harborSprite);
 
         if(monster != NULL && monster->IsSpawning() == false)
         {

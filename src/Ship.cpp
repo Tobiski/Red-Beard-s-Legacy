@@ -39,7 +39,7 @@ Ship::Ship(std::string imageDir, float posx, float posy)
     this->posy = posy;
     sprite.SetPosition(this->posx, this->posy);
     accel = 0;
-    angle = 0;
+    angle = 90;
     sprite.SetCenter(sprite.GetSize().x / 2, sprite.GetSize().y / 2);
     speedx = 0;
     speedy = 0;
