@@ -203,12 +203,12 @@ void Game::HandleInput()
                 gameState = MAINMENU;
                 cannonballs.clear();
                 enemies.clear();
-                ship = new Ship("images/ship.png", 100, 100);
+                ship = new Ship("images/playerShip.png", 100, 100);
             }
             else if(gameState == GAMEOVER)
             {
                 gameState = MAINMENU;
-                ship = new Ship("images/ship.png", 100, 100);
+                ship = new Ship("images/playerShip.png", 100, 100);
             }
             else if(gameState == HARBOR && harborSelect == ENTER_MARKET)
                 gameState = MARKET;
