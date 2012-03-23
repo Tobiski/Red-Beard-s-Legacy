@@ -29,22 +29,10 @@ public:
     void UpgradeCannons() { cannonLevel++; };
     int GetGold() { return gold; }
     int GetCannonLevel() { return cannonLevel; }
-    void AddScore()
-    {
-        score += 10;
-    }
-    void AddHit()
-    {
-        shipsHit++;
-    }
-    void Repair()
-    {
-        health++;
-    }
-    void AddGold(int amount)
-    {
-        gold += amount;
-    }
+    void AddScore() { score += 10; }
+    void AddHit() { shipsHit++; }
+    void Repair() { health++; }
+    void AddGold(int amount) { gold += amount; }
     std::string GetInfo();
     std::string GetScore();
     std::string GetGoldString();
