@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/SwordFight.h"
 
 SwordFight::SwordFight(sf::RenderWindow *ewindow) :
@@ -88,7 +87,6 @@ void SwordFight::Update()
 
     /* Calculate if player and computer are in hitting range after movement */
     deltaX = computer->GetXpos() - (player->GetXpos() + player->GetWidth()/2);
-    std::cout << "                     " << deltaX << std::endl;
 
     /*
      * TurnTimer prevents that players can't strike too thick
@@ -138,7 +136,6 @@ void SwordFight::Update()
         SwapTurns();
     }
 
-std::cout << "Player: " << player->GetHealth() << " Enemy: " << computer->GetHealth() << std::endl;
     /* Swap frame area from defense to attack and vice versa */
     if(player->GetTurn() == DEFENSE)
         player->SetDrawArea(2,0);

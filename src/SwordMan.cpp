@@ -1,5 +1,4 @@
 #include "../include/SwordMan.h"
-#include <iostream>
 SwordMan::SwordMan(int id)
 {
     //cto
