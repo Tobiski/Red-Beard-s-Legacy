@@ -45,6 +45,8 @@ private:
     sf::Sprite pirateSprite;
     sf::Sprite seaSprite;
     sf::Image seaImage;
+    sf::Image harborImage;
+    sf::Sprite harborSprite;
     int spawnCooldown;
     MENUSELECT menuSelect;
     PAUSESELECT pauseSelect;

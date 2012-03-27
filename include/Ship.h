@@ -26,23 +26,13 @@ public:
     void Turn(int dir);
     void Fire(std::vector<Cannonball*> &cannonballs);
     bool RemoveGold(int amount);
+    void UpgradeCannons() { cannonLevel++; };
     int GetGold() { return gold; }
-    void AddScore()
-    {
-        score += 10;
-    }
-    void AddHit()
-    {
-        shipsHit++;
-    }
-    void Repair()
-    {
-        health++;
-    }
-    void AddGold(int amount)
-    {
-        gold += amount;
-    }
+    int GetCannonLevel() { return cannonLevel; }
+    void AddScore() { score += 10; }
+    void AddHit() { shipsHit++; }
+    void Repair() { health++; }
+    void AddGold(int amount) { gold += amount; }
     std::string GetInfo();
     std::string GetScore();
     std::string GetGoldString();

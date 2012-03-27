@@ -10,7 +10,11 @@
 #include "../include/Monster.h"
 #include "../include/TextBox.h"
 #include "../include/SwordFight.h"
+<<<<<<< HEAD
 #include "../include/TopScore.h"
+=======
+#include "../include/Collision.h"
+>>>>>>> bfc8f03b3a3dbe6fbe6bd4fb1fdebef581026207
 
 Game::Game()
 {
@@ -64,6 +68,11 @@ void Game::Init()
     pirateSprite.SetImage(pirateImage);
     pirateSprite.SetPosition(WIN_WIDTH - 160, 10);
 
+    harborImage.LoadFromFile("images/harbor.png");
+    harborImage.SetSmooth(false);
+    harborSprite.SetImage(harborImage);
+    harborSprite.SetPosition(100, 0);
+
     gameState = MAINMENU;
     menuSelect = START;
     harborSelect = ENTER_MARKET;
@@ -74,10 +83,7 @@ void Game::Init()
     window = new sf::RenderWindow(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT, WIN_BPP), "Red Beard's Legacy");
     window->SetFramerateLimit(MAXFPS);
 
-    ship = new Ship("images/playerShip.png", 100, 100);
-
-    SwordFight swordFight(window);
-    swordFight.Fight();
+    ship = new Ship("images/playerShip.png", 150, 100);
 
     GameLoop();
 }
@@ -204,12 +210,12 @@ void Game::HandleInput()
                 gameState = MAINMENU;
                 cannonballs.clear();
                 enemies.clear();
-                ship = new Ship("images/ship.png", 100, 100);
+                ship = new Ship("images/playerShip.png", 100, 100);
             }
             else if(gameState == GAMEOVER)
             {
                 gameState = MAINMENU;
-                ship = new Ship("images/ship.png", 100, 100);
+                ship = new Ship("images/playerShip.png", 100, 100);
             }
             else if(gameState == HARBOR && harborSelect == ENTER_MARKET)
                 gameState = MARKET;
@@ -217,6 +223,9 @@ void Game::HandleInput()
             {
                 gameState = PLAYING;
                 harborSelect = ENTER_MARKET;
+                ship->SetRotation(90);
+                ship->SetposX(150);
+                ship->SetposY(100);
             }
             else if(gameState == MARKET && marketSelect == REPAIR)
             {
@@ -234,8 +243,17 @@ void Game::HandleInput()
             else if(gameState == MARKET && marketSelect == UPGRADE)
                 if(ship->GetGold() >= 1000)
                 {
-                    ship->RemoveGold(1000);
-                    textBox = new TextBox(0, 0, "You upgraded the cannons for 1000 golds.");
+                    if(ship->GetCannonLevel() < MAX_CANNON_LEVEL)
+                    {
+                        ship->UpgradeCannons();
+                        ship->RemoveGold(1000);
+                        textBox = new TextBox(0, 0, "You upgraded the cannons for 1000 golds.");
+                    }
+                    else
+                    {
+                        ship->UpgradeCannons();
+                        textBox = new TextBox(0, 0, "Your cannons are already fully upgraded.");
+                    }
                 }
                 else
                     textBox = new TextBox(0, 0, "You don't have enough gold\nto upgrade the cannons.");
@@ -357,6 +375,12 @@ void Game::Update()
     }
 
     /* Start checking collision */
+
+    /* Check if the player enters the barbor */
+    if(Collision::PixelPerfectTest(ship->GetSprite(), harborSprite))
+        gameState = HARBOR;
+
+    /* Check if enemies collide against each other */
     for(int i = 0; i < enemies.size(); i++)
     {
         for(int j = 0; j < enemies.size(); j++)
@@ -367,7 +391,8 @@ void Game::Update()
             }
             if(i != j)// check that ships don't collide with themselfs
             {
-                if(enemies[i]->CheckCollision(*enemies[j]))
+                if(Collision::PixelPerfectTest(enemies[i]->GetSprite(), enemies[j]->GetSprite()))
+                //if(enemies[i]->CheckCollision(*enemies[j]))
                 {
                     enemies[i]->ForceTurn(LEFT);
                     enemies[j]->ForceTurn(RIGHT);
@@ -379,10 +404,9 @@ void Game::Update()
     /* Check monster collision against player's ship */
     if(monster != NULL)
     {
-        if(monster->CheckCollision(*ship))
+        if(Collision::PixelPerfectTest(ship->GetSprite(), monster->GetSprite()))
         {
-            ship->GetHit();
-            ship->GetHit();
+            ship->GetHit(2);
             delete monster;
             monster = NULL;
             monsterTimer = std::clock();
@@ -410,8 +434,8 @@ void Game::Update()
                 {
                     ship->AddScore();
                     cannonballs.erase(cannonballs.begin()+i);
-                    monster->GetHit();
-                    if(monster->GetHealth() == 0)
+                    monster->GetHit(ship->GetCannonLevel());
+                    if(monster->GetHealth() <= 0)
                     {
                         delete monster;
                         monster = NULL;
@@ -430,22 +454,22 @@ void Game::Update()
 
                 if(cannonballs[i]->GetId() == ENEMY)
                 {
-                    if(cannonballs[i]->CheckCollision(*ship))
+                    if(Collision::PixelPerfectTest(ship->GetSprite(), cannonballs[i]->GetSprite()))
                     {
-                        ship->GetHit();
+                        ship->GetHit(1);
                         cannonballs.erase(cannonballs.begin()+i);
                         break;
                     }
                 }
 
-                if(cannonballs[i]->CheckCollision(*enemies[j]))
+                if(Collision::PixelPerfectTest(cannonballs[i]->GetSprite(), enemies[j]->GetSprite()))
                 {
                     /* If cannonball belongs to player, check collision against enemy ships */
                     if(cannonballs[i]->GetId() != ENEMY)
                     {
-                        if(enemies[j]->GetHealth() > 1)
+                        if(enemies[j]->GetHealth() > ship->GetCannonLevel())
                         {
-                            enemies[j]->GetHit();
+                            enemies[j]->GetHit(ship->GetCannonLevel());
                             cannonballs.erase(cannonballs.begin()+i);
                             ship->AddHit();
                             ship->AddScore();
@@ -488,6 +512,8 @@ void Game::Render()
     else if(gameState == PLAYING)
     {
         window->Draw(seaSprite);
+
+        window->Draw(harborSprite);
 
         if(monster != NULL && monster->IsSpawning() == false)
         {

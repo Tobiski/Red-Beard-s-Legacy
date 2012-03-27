@@ -9,5 +9,6 @@
 #define WIN_HEIGHT 768
 #define WIN_BPP 32
 #define MAX_FPS 80
+#define MAX_CANNON_LEVEL 5
 
 #endif
