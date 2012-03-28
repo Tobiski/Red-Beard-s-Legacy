@@ -2,16 +2,51 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <vector>
 #include "../include/TopScore.h"
 
 TopScore::TopScore()
 {
-    //ctor
+    int r = UpdateScoreList();
 }
 
 TopScore::~TopScore()
 {
-    //dtor
+}
+
+int TopScore::UpdateScoreList()
+{
+    if(!topList.empty())
+        topList.clear();
+
+    std::fstream file("res/topScore.txt");
+    if(file.is_open())
+    {
+        while(file.good())
+        {
+            std::string fileLine;
+            getline(file, fileLine);
+
+            // This causing error
+            //topList.push_back(&fileLine);
+        }
+    }
+    else
+    {
+        file.close();
+        return -1;
+    }
+
+    file.close();
+    return 0;
+}
+
+int TopScore::NewRecord(int index)
+{
+    // Remove last score from array
+    topList.pop_back();
+
+    return 0;
 }
 
 int TopScore::addNewScore(std::string nick, int shots, float accuracy, float score)
@@ -21,32 +56,10 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, float sco
         score = 100000000;
     }
 
-    std::string fileContent;
-
-    /* Open handles for reading and writing to file */
-    std::fstream rfile("res/topScore.txt");
-    if(rfile.is_open())
+    for(long i = 0; i < topList.size(); i++)
     {
-        while(rfile.good())
-        {
-            getline(rfile, fileContent);
-            std::istringstream token(fileContent);
-            std::string scoreString;
-
-            getline(token, scoreString, ';');
-            std::istringstream scoreStream(scoreString);
-            float fileScore;
-            scoreStream >> fileScore;
-            std::cout << fileScore << std::endl;
-        }
-        rfile.close();
+        std::cout << topList.at(i)->substr(0,topList.at(i)->find_first_of(";"));
     }
-    else
-    {
-        rfile.close();
-        return -1;
-    }
-
 
     return 0;
 }
