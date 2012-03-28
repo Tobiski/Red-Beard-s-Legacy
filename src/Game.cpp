@@ -10,11 +10,8 @@
 #include "../include/Monster.h"
 #include "../include/TextBox.h"
 #include "../include/SwordFight.h"
-<<<<<<< HEAD
 #include "../include/TopScore.h"
-=======
 #include "../include/Collision.h"
->>>>>>> bfc8f03b3a3dbe6fbe6bd4fb1fdebef581026207
 
 Game::Game()
 {

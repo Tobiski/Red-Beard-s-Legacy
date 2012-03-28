@@ -24,7 +24,7 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, float sco
     std::string fileContent;
 
     /* Open handles for reading and writing to file */
-    std::ifstream rfile("../res/topcore.txt");
+    std::fstream rfile("res/topScore.txt");
     if(rfile.is_open())
     {
         while(rfile.good())
@@ -37,6 +37,7 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, float sco
             std::istringstream scoreStream(scoreString);
             float fileScore;
             scoreStream >> fileScore;
+            std::cout << fileScore << std::endl;
         }
         rfile.close();
     }
