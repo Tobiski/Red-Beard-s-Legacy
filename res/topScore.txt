@@ -1,10 +1,10 @@
 1000;Unknown;0;0
 580;Unknown;0;0
 500;Unknown;0;0
+500;dotdeb;1;1
 340;Unknown;0;0
 230;Unknown;0;0
 220;Unknown;0;0
 190;Unknown;0;0
 150;Unknown;0;0
 50;Unknown;0;0
-30;Unknown;0;0
