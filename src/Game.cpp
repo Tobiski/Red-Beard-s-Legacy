@@ -111,7 +111,7 @@ void Game::GameLoop()
             Update();
             Render();
         }
-        else if(gameState == PAUSED || gameState == HARBOR || gameState == MARKET)
+        else if(gameState == PAUSED || gameState == HARBOR || gameState == MARKET || gameState == SHOW_HISCORE)
         {
             /* Display pause menu, Harbor menu or Market menu*/
             HandleInput();
@@ -140,6 +140,10 @@ void Game::HandleInput()
             {
                 gameState = PLAYING;
             }
+            else if(gameState == SHOW_HISCORE)
+            {
+                gameState = MAINMENU;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Down)
@@ -147,6 +151,8 @@ void Game::HandleInput()
             if(gameState == MAINMENU)
             {
                 if(menuSelect == START)
+                    menuSelect = HISCORE;
+                else if(menuSelect == HISCORE)
                     menuSelect = QUIT;
             }
             else if(gameState == PAUSED)
@@ -173,6 +179,8 @@ void Game::HandleInput()
             if(gameState == MAINMENU)
             {
                 if(menuSelect == QUIT)
+                    menuSelect = HISCORE;
+                else if(menuSelect == HISCORE)
                     menuSelect = START;
             }
             else if(gameState == PAUSED)
@@ -200,6 +208,8 @@ void Game::HandleInput()
                 window->Close();
             else if(gameState == MAINMENU && menuSelect == START)
                 gameState = PLAYING;
+            else if(gameState == MAINMENU && menuSelect == HISCORE)
+                gameState = SHOW_HISCORE;
             else if(gameState == PAUSED && pauseSelect == RESUME)
                 gameState = PLAYING;
             else if(gameState == PAUSED && pauseSelect == MENU)
@@ -500,6 +510,10 @@ void Game::Render()
         {
             skullSprite.SetPosition(340, 290);
         }
+        else if(menuSelect == HISCORE)
+        {
+            skullSprite.SetPosition(340, 345);
+        }
         else if(menuSelect == QUIT)
         {
             skullSprite.SetPosition(340, 400);
@@ -681,6 +695,21 @@ void Game::Render()
         infoText.SetColor(sf::Color(0, 0, 0, 255));
         infoText.SetPosition(WIN_WIDTH/2 - 100, WIN_HEIGHT/2 + 100);
         window->Draw(infoText);
+    }
+    else if(gameState == SHOW_HISCORE)
+    {
+        window->Clear();
+
+        window->Draw(seaSprite);
+
+        window->Draw(pauseMenuSprite);
+
+        sf::String scoreText("HISCORE", scoreFont, 42);
+        scoreText.SetColor(sf::Color(0, 0, 0, 200));
+        scoreText.SetCenter(scoreText.GetSize(), scoreText.GetSize());
+        scoreText.SetPosition(pauseMenuSprite.GetPosition().x + 170 , pauseMenuSprite.GetPosition().y + 100);
+
+        window->Draw(scoreText);
     }
 
     if(textBox != NULL && textBox->GetTime() < 2)

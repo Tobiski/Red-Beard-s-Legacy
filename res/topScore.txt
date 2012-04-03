@@ -14,6 +14,9 @@
 500;dotdeb;1;1
 500;dotdeb;1;1
 500;dotdeb;1;1
+500;dotdeb;1;1
+500;dotdeb;1;1
+500;dotdeb;1;1
 340;Unknown;0;0
 230;Unknown;0;0
 220;Unknown;0;0
