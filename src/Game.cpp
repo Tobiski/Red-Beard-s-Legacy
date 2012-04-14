@@ -16,8 +16,7 @@
 Game::Game()
 {
     TopScore top;
-    int r = top.addNewScore("dotdeb",1,1.0f,500.0f);
-    std::cout << r << std::endl;
+    int r = top.addNewScore("tobiski",1,1.0f,600.0f);
     running = true;
     srand(time(NULL));
     Init();

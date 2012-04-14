@@ -23,7 +23,9 @@ void TopScore::setScoreList()
     {
         for(int i = 0; i < topList.size(); i++)
         {
-             file << topList[i] << "\n";
+                file << topList[i];
+                if(i != topList.size() - 1)
+                    file << "\n";
         }
     }
     file.close();
@@ -51,7 +53,7 @@ int TopScore::UpdateScoreList()
         file.close();
         return -1;
     }
-
+    std::cout << topList.size();
     file.close();
     return 0;
 }
@@ -59,6 +61,7 @@ int TopScore::UpdateScoreList()
 int TopScore::addNewScore(std::string nick, int shots, float accuracy, float score)
 {
     int j = 0;
+
     for(long i = 0; i < topList.size(); i++, j++)
     {
         /* translate string to float */
@@ -71,10 +74,8 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, float sco
         if(score > oldScore)
         {
             // Remove last score from array
-            topList.pop_back();
 
-            for(int i=0; i < topList.size(); i++)
-                std::cout << topList[i] << std::endl;
+            topList.pop_back();
 
             // Convert float back to string
             std::stringstream s;
