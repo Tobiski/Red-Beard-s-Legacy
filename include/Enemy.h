@@ -24,6 +24,7 @@ public:
     void Turn();
     void Fire(std::vector<Cannonball*> &cannonballs);
     void ForceTurn(int dir); // ship has collided with another shipol
+    int GetTurnTime() { return turnTime; }
 
     bool GetIntruder() { return intruder; }
     void SetIntruder(bool intr) { intruder = intr; }

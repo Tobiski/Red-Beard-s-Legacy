@@ -382,6 +382,36 @@ void Game::Update()
 
     /* Start checking collision */
 
+    /* Check if enemy ship is in the same area with player and print out rotation */
+
+    for(int i = 0; i < enemies.size(); i++)
+    {
+        if(enemies[i]->GetArea() == ship->GetArea())
+        {
+            double x = enemies[i]->GetXpos();
+            x += enemies[i]->GetHeight() * cos((enemies[i]->GetRotation()+90)*3.14159265/180);
+            double y = enemies[i]->GetYpos();
+            y += enemies[i]->GetHeight() * sin((enemies[i]->GetRotation()+90)*3.14159265/180);
+
+            double distA = Drawable::GetDistance(ship->GetXpos(), ship->GetYpos(), enemies[i]->GetXpos(), enemies[i]->GetYpos());
+            double distB = Drawable::GetDistance(x, y, enemies[i]->GetXpos(), enemies[i]->GetYpos());
+            double distC = Drawable::GetDistance(ship->GetXpos(), ship->GetYpos(), x, y);
+
+            double s = (distA+distB+distC) / 2; // Puolet kolmion ympärysmitasta
+            double area = sqrt(s*(s-distA)*(s-distB)*(s-distC)); // Kolmion pinta-ala
+
+            double area2 = sqrt(pow(pow(distA, 2)+pow(distB,2)+pow(distC,2),2) - 2*(pow(distA,4)+pow(distB,4)+pow(distC,4))) / 4;
+
+            double angle = asin((area*2) / (distA*distB));
+
+            angle = angle*180/3.14159265;
+
+            if(angle < 70 && enemies[i]->GetTurnTime() <= 400)
+                enemies[i]->ForceTurn(RIGHT);
+        }
+    }
+
+
     /* Check if the player enters the barbor */
     if(Collision::PixelPerfectTest(ship->GetSprite(), harborSprite))
         gameState = HARBOR;
