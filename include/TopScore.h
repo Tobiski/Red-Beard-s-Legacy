@@ -7,7 +7,7 @@ class TopScore
         TopScore();
         virtual ~TopScore();
 
-        int addNewScore(std::string nick, int shots, float accuracy, float score);
+        int addNewScore(std::string nick, int shots, float accuracy, int score);
         std::vector<std::string> getScoreList();
 
     protected:

@@ -36,6 +36,11 @@ public:
     std::string GetInfo();
     std::string GetScore();
     std::string GetGoldString();
+
+    std::string GetNick() { return std::string("adsf"); }
+    float getAccuracy() { return accuracy; }
+    int GetIntScore() { return score; }
+    int GetShots() { return cannonballsShot; }
 };
 
 #endif

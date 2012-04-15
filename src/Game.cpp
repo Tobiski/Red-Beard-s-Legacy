@@ -84,6 +84,10 @@ void Game::Init()
 
 void Game::GameOver()
 {
+    /* Check if player reached topScore */
+    TopScore topScoreFile;
+    topScoreFile.addNewScore(ship->GetNick(), ship->GetShots(), ship->getAccuracy(), ship->GetIntScore());
+
     cannonballs.clear();
     enemies.clear();
     gameState = GAMEOVER;

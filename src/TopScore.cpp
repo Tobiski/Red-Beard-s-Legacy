@@ -59,7 +59,7 @@ int TopScore::UpdateScoreList()
     return 0;
 }
 
-int TopScore::addNewScore(std::string nick, int shots, float accuracy, float score)
+int TopScore::addNewScore(std::string nick, int shots, float accuracy, int score)
 {
     int j = 0;
 
