@@ -15,8 +15,6 @@
 
 Game::Game()
 {
-    TopScore top;
-    int r = top.addNewScore("tobiski",1,1.0f,600.0f);
     running = true;
     srand(time(NULL));
     Init();
@@ -141,6 +139,7 @@ void Game::HandleInput()
             }
             else if(gameState == SHOW_HISCORE)
             {
+                ClearTopList();
                 gameState = MAINMENU;
             }
         }
@@ -207,8 +206,10 @@ void Game::HandleInput()
                 window->Close();
             else if(gameState == MAINMENU && menuSelect == START)
                 gameState = PLAYING;
-            else if(gameState == MAINMENU && menuSelect == HISCORE)
+            else if(gameState == MAINMENU && menuSelect == HISCORE) {
+                InitTopList();
                 gameState = SHOW_HISCORE;
+            }
             else if(gameState == PAUSED && pauseSelect == RESUME)
                 gameState = PLAYING;
             else if(gameState == PAUSED && pauseSelect == MENU)
@@ -306,6 +307,18 @@ void Game::HandleInput()
         if(window->GetInput().IsKeyDown(sf::Key::Right)) ship->Turn(RIGHT);
         if(window->GetInput().IsKeyDown(sf::Key::Space)) ship->Fire(cannonballs);
     }
+}
+
+void Game::InitTopList()
+{
+    TopScore topFile;
+    topList = topFile.getScoreList();
+}
+
+void Game::ClearTopList()
+{
+    if(!topList.empty())
+        topList.clear();
 }
 
 void Game::Update()
@@ -738,6 +751,42 @@ void Game::Render()
         scoreText.SetCenter(scoreText.GetSize(), scoreText.GetSize());
         scoreText.SetPosition(pauseMenuSprite.GetPosition().x + 170 , pauseMenuSprite.GetPosition().y + 100);
 
+        if(topList.empty())
+        {
+            sf::String errorText("Error loading highscores", scoreFont, 38);
+            scoreText.SetColor(sf::Color(0, 0, 0, 200));
+            scoreText.SetCenter(scoreText.GetSize(), scoreText.GetSize());
+            scoreText.SetPosition(pauseMenuSprite.GetPosition().x + 170 , pauseMenuSprite.GetPosition().y + 200);
+
+            window->Draw(errorText);
+        }
+        else
+        {
+            // Location where recod will be drawn
+            int yLocation = 150;
+            for(int i = 0; i < topList.size(); i++)
+            {
+                std::string currRecord = topList.at(i);
+
+                // Replace ; to space
+                for(int i = 0; i < currRecord.length(); i++)
+                {
+                    switch(currRecord[i])
+                    {
+                        case ';':
+                            currRecord[i] = ' ';
+                            break;
+                    }
+                }
+
+                sf::String scoreText(currRecord, scoreFont, 30);
+                scoreText.SetColor(sf::Color(sf::Color::Black));
+                scoreText.SetCenter(scoreText.GetSize(), scoreText.GetSize());
+                scoreText.SetPosition(pauseMenuSprite.GetPosition().x + 170 , pauseMenuSprite.GetPosition().y + yLocation);
+                yLocation += 30;
+                window->Draw(scoreText);
+            }
+        }
         window->Draw(scoreText);
     }
 

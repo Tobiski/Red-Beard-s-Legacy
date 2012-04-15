@@ -55,6 +55,7 @@ int TopScore::UpdateScoreList()
     }
     std::cout << topList.size();
     file.close();
+
     return 0;
 }
 
@@ -74,7 +75,6 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, float sco
         if(score > oldScore)
         {
             // Remove last score from array
-
             topList.pop_back();
 
             // Convert float back to string

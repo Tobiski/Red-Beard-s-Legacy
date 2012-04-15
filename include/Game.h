@@ -53,6 +53,7 @@ private:
     GAMESTATE gameState;
     HARBORSELECT harborSelect;
     MARKETSELECT marketSelect;
+    std::vector<std::string> topList;
 
     std::clock_t monsterTimer;
     double delta;
@@ -69,7 +70,8 @@ public:
     void HandleInput();
     void Update();
     void Render();
-
+    void InitTopList();
+    void ClearTopList();
 };
 
 #endif
