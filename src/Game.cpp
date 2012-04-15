@@ -353,7 +353,7 @@ void Game::Update()
         monster->Update(ship->GetXpos(), ship->GetYpos());
     }
 
-    if(enemies.size() < 5 && spawnCooldown == 0)
+    if(enemies.size() < 1 && spawnCooldown == 0)
     {
         enemies.push_back(new Enemy());
         spawnCooldown = 200;
@@ -423,8 +423,12 @@ void Game::Update()
 
             angle = angle*180/3.14159265;
 
+            std::cout << angle << std::endl;
+
             if(angle < 70 && enemies[i]->GetTurnTime() <= 400)
+            {
                 enemies[i]->ForceTurn(RIGHT);
+            }
         }
     }
 

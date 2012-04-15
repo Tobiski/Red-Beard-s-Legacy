@@ -61,7 +61,7 @@ void Enemy::Update()
             posx = posx + speedx;
     }
 
-    if(posy+ speedy*-1 > 50 && posy+ speedy*-1 < WIN_HEIGHT - 50)
+    if(posy+ speedy*-1 > 100 && posy+ speedy*-1 < WIN_HEIGHT - 50)
     {
         if(posy < 100 || posy > WIN_HEIGHT - 100)
             posy = posy + speedy*-0.5;
