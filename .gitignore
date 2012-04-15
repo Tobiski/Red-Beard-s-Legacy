@@ -9,3 +9,4 @@ images/*.psd
 *.layout*
 *.cbp
 *.depend
+*.txt
