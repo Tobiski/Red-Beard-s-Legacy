@@ -2,6 +2,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include "../include/TopScore.h"
 
@@ -53,7 +54,6 @@ int TopScore::UpdateScoreList()
         file.close();
         return -1;
     }
-    std::cout << topList.size();
     file.close();
 
     return 0;
@@ -81,7 +81,7 @@ int TopScore::addNewScore(std::string nick, int shots, float accuracy, int score
             std::stringstream s;
             s << score;
             std::stringstream accur;
-            accur << accuracy;
+            accur << std::setprecision (4) << accuracy;
             std::stringstream shot;
             shot << shots;
 
