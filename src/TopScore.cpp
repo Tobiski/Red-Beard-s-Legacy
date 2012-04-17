@@ -103,4 +103,16 @@ std::vector<std::string> TopScore::getScoreList()
     return topList;
 }
 
+int TopScore::GetLowestScore()
+{
+    int score;
+
+    std::string scoreString = topList.at(topList.size()-1).substr(0, topList.at(topList.size()-1).find_first_of(";"));
+    std::istringstream scoreStream(scoreString);
+
+    scoreStream >> score;
+
+    return score;
+}
+
 

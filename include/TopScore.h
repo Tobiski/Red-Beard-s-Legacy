@@ -9,6 +9,7 @@ class TopScore
 
         int addNewScore(std::string nick, int shots, float accuracy, int score);
         std::vector<std::string> getScoreList();
+        int GetLowestScore();
 
     protected:
     private:

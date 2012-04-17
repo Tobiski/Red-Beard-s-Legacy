@@ -11,7 +11,7 @@ enum MENUSELECT { START, HISCORE, QUIT };
 enum PAUSESELECT { RESUME, MENU };
 enum HARBORSELECT { ENTER_MARKET, EXIT_HARBOR };
 enum MARKETSELECT { REPAIR, UPGRADE, EXIT_MARKET };
-enum GAMESTATE { MAINMENU, PLAYING, PAUSED, HARBOR, MARKET, GAMEOVER, SHOW_HISCORE };
+enum GAMESTATE { MAINMENU, PLAYING, PAUSED, HARBOR, MARKET, GAMEOVER, SHOW_HISCORE, ENTER_HIGHSCORE};
 
 class Cannonball;
 class Ship;
@@ -54,7 +54,7 @@ private:
     HARBORSELECT harborSelect;
     MARKETSELECT marketSelect;
     std::vector<std::string> topList;
-
+    std::string playerName;
     std::clock_t monsterTimer;
     double delta;
     Monster *monster;

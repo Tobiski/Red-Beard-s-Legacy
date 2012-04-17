@@ -84,22 +84,24 @@ void Game::Init()
 
 void Game::GameOver()
 {
+    gameState = GAMEOVER;
     /* Check if player reached topScore */
     TopScore topScoreFile;
-    topScoreFile.addNewScore(ship->GetNick(), ship->GetShots(), ship->getAccuracy(), ship->GetIntScore());
+
+    if(topScoreFile.GetLowestScore() < ship->GetIntScore())
+    {
+        gameState = ENTER_HIGHSCORE;
+    }
 
     cannonballs.clear();
     enemies.clear();
-    gameState = GAMEOVER;
-
-    GameLoop();
 }
 
 void Game::GameLoop()
 {
     while(running)
     {
-        if(gameState == MAINMENU || gameState == GAMEOVER)
+        if(gameState == MAINMENU || gameState == GAMEOVER || gameState == PAUSED || gameState == HARBOR || gameState == MARKET || gameState == SHOW_HISCORE || gameState == ENTER_HIGHSCORE)
         {
             /* Display mainmenu or Game Over -screen */
             HandleInput();
@@ -112,12 +114,6 @@ void Game::GameLoop()
             Update();
             Render();
         }
-        else if(gameState == PAUSED || gameState == HARBOR || gameState == MARKET || gameState == SHOW_HISCORE)
-        {
-            /* Display pause menu, Harbor menu or Market menu*/
-            HandleInput();
-            Render();
-        }
     }
 }
 
@@ -128,6 +124,24 @@ void Game::HandleInput()
         if(event.Type == sf::Event::Closed)
         {
             window->Close();
+        }
+        if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Back)
+        {
+            if(gameState == ENTER_HIGHSCORE && playerName.empty() == false)
+            {
+                playerName.erase(playerName.end()-1);
+            }
+        }
+        else if(event.Type == sf::Event::TextEntered)
+        {
+            if(gameState == ENTER_HIGHSCORE)
+            {
+                /* Backspace unicode == 8 */
+                if (event.Text.Unicode < 128 && event.Text.Unicode != 8)
+                {
+                    playerName += static_cast<char>(event.Text.Unicode);
+                }
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Escape)
@@ -273,6 +287,12 @@ void Game::HandleInput()
                 gameState = HARBOR;
                 marketSelect = REPAIR;
             }
+            else if(gameState == ENTER_HIGHSCORE)
+            {
+                TopScore topScoreFile;
+                topScoreFile.addNewScore(playerName, ship->GetShots(), ship->getAccuracy(), ship->GetIntScore());
+                gameState = MAINMENU;
+            }
         }
 
         if(event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::S && gameState == PLAYING)
@@ -353,7 +373,7 @@ void Game::Update()
         monster->Update(ship->GetXpos(), ship->GetYpos());
     }
 
-    if(enemies.size() < 1 && spawnCooldown == 0)
+    if(enemies.size() < 5 && spawnCooldown == 0)
     {
         enemies.push_back(new Enemy());
         spawnCooldown = 200;
@@ -410,10 +430,24 @@ void Game::Update()
             double y = enemies[i]->GetYpos();
             y += enemies[i]->GetHeight() * sin((enemies[i]->GetRotation()+90)*3.14159265/180);
 
+            sf::Vector2f v1(x-enemies[i]->GetXpos(), y-enemies[i]->GetYpos());
+            sf::Vector2f v2(ship->GetXpos()-enemies[i]->GetXpos(), ship->GetYpos()-enemies[i]->GetYpos());
+
             double distA = Drawable::GetDistance(ship->GetXpos(), ship->GetYpos(), enemies[i]->GetXpos(), enemies[i]->GetYpos());
             double distB = Drawable::GetDistance(x, y, enemies[i]->GetXpos(), enemies[i]->GetYpos());
             double distC = Drawable::GetDistance(ship->GetXpos(), ship->GetYpos(), x, y);
 
+            double dotp = v1.x*v2.x + v1.y*v2.y;
+
+            if(dotp > 0 && enemies[i]->GetTurnTime() <= 400)
+            {
+                enemies[i]->ForceTurn(RIGHT);
+            }
+            else if(enemies[i]->GetTurnTime() <= 400)
+            {
+                enemies[i]->ForceTurn(LEFT);
+            }
+            /*
             double s = (distA+distB+distC) / 2; // Puolet kolmion ympärysmitasta
             double area = sqrt(s*(s-distA)*(s-distB)*(s-distC)); // Kolmion pinta-ala
 
@@ -429,6 +463,7 @@ void Game::Update()
             {
                 enemies[i]->ForceTurn(RIGHT);
             }
+            */
         }
     }
 
@@ -736,7 +771,7 @@ void Game::Render()
         }
         window->Draw(pauseSkullSprite);
     }
-    else if(gameState == GAMEOVER)
+    else if(gameState == GAMEOVER || gameState == ENTER_HIGHSCORE)
     {
         window->Draw(gameOverSprite);
 
@@ -745,6 +780,18 @@ void Game::Render()
         infoText.SetColor(sf::Color(0, 0, 0, 255));
         infoText.SetPosition(WIN_WIDTH/2 - 100, WIN_HEIGHT/2 + 100);
         window->Draw(infoText);
+
+        if(gameState == ENTER_HIGHSCORE)
+        {
+            sf::Shape textbg = sf::Shape::Rectangle(0, 0, 100, 50, sf::Color(255, 255, 255, 255));
+
+            sf::String nameString(playerName, scoreFont, 30);
+            nameString.SetColor(sf::Color(sf::Color::Black));
+            nameString.SetPosition(10, 10);
+
+            window->Draw(textbg);
+            window->Draw(nameString);
+        }
     }
     else if(gameState == SHOW_HISCORE)
     {
